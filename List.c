@@ -1,8 +1,11 @@
-//
-// Jay Montoya
-// 1742317 - jaanmont
-// pa2
-//
+/* --------------------------------
+
+  List.c | PA3
+  Programmer: Jay Montoya
+  UCSC ID: jaanmont | 1742317
+
+-----------------------------------
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "List.h"
@@ -10,7 +13,7 @@
 // definition of a NodeObj
 typedef struct NodeObj {
 
-  void* value;
+  long value;
   struct NodeObj* next; // next NodeObj
   struct NodeObj* prev; // previous
 
@@ -21,10 +24,10 @@ typedef NodeObj* Node;
 
 // definition of a ListObj
 typedef struct ListObj {
-  Node head;  // refers to the head node
-  Node tail; // refers to the tail node
-  Node cursor;
-  int length;  // integer representing the length
+  Node head;    // refers to the head node
+  Node tail;    // refers to the tail node
+  Node cursor;  // cursor
+  int length;   // integer representing the length
   int index;
 } ListObj;
 
@@ -32,7 +35,7 @@ typedef struct ListObj {
 // newNode()
 // Returns reference to the new Node object. Initializes fields.
 // Private.
-Node newNode(void* data) {
+Node newNode(long data) {
   Node N = malloc(sizeof(NodeObj));
    N->value = data;
    N->next = NULL;
@@ -106,7 +109,7 @@ int index(List L) {
 // front()
 // Returns the front element of L.
 // PRE: length() > 0
-void* front(List L) {
+long front(List L) {
   if (length(L) < 1) {
     //printf("List Error: attempt to access front node when NULL\n");
     return NULL;
@@ -118,7 +121,7 @@ void* front(List L) {
 // back()
 // returns the back element of L
 // PRE: length() > 0
-void* back(List L) {
+long back(List L) {
   if (length(L) < 1) {
     //printf("List Error: attempt to access back node when size = 0\n");
     return NULL;
@@ -130,7 +133,7 @@ void* back(List L) {
 
 // prepend()
 // prepends an element to the front of a list
-void prepend(List L, void* data) {
+void prepend(List L, long data) {
   // Inserts new element into L.
   // If L is non-empty, inserts it before the head node
 
@@ -169,7 +172,7 @@ void prepend(List L, void* data) {
 
 // append()
 // appends an element to the back of the list
-void append(List L, void* data) {
+void append(List L, long data) {
   // inserts new element into L.
   // if L is non-empty, inserts it after the last element
 
@@ -418,7 +421,7 @@ void delete(List L) {
 // get()
 // returns the cursor element of L
 // PRE: length() > 0 and index >= 0
-void* get(List L) {
+long get(List L) {
   // check the preconditon before returning
   if (length(L) > 0 && index(L) >= 0) {
     return L->cursor->value;
@@ -447,7 +450,7 @@ void printList(FILE* out, List L) {
 
 // insertBefore()
 // inserts an element before the cursor if it is defined
-void insertBefore(List L, void* data) {
+void insertBefore(List L, long data) {
 
     if (index(L) == -1) {
       //printf("List Error: tried insertBefore on bad cursor");
@@ -476,7 +479,7 @@ void insertBefore(List L, void* data) {
 
 // insertAfter()
 // inserts an element after the cursor
-void insertAfter(List L, void* data) {
+void insertAfter(List L, long data) {
 
    if (index(L) == -1) {
      //printf("List Error: tried insertBefore on bad cursor");
