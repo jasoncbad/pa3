@@ -436,15 +436,17 @@ long get(List L) {
 // prints the list to an outputfile named output.txt
 // string representation of L as a string sequence of space-seperated integers
 void printList(FILE* out, List L) {
+
   // move the cursor to the front of L
   moveFront(L);
 
   // loop through and print each element to the output file 'Output.txt' in
   // the format specified by pa1.
   while(L->cursor != NULL) {
-    fprintf(out, "%p ", get(L));
+    fprintf(out, "%d ", get(L));
     moveNext(L);
   }
+  printf("\n");
 }
 
 
@@ -523,3 +525,38 @@ void clear(List L) {
    }
    return;
  }
+
+// copyList()
+// Returns a new List representing the same integer sequence as L.
+// The cursor in the new list is undefined, regardless of the state
+// of the cursor in L. The List L is unchanged.
+List copyList(List L) {
+  List NewList = newList();
+
+  moveFront(L);
+  while(index(L) >= 0) {
+    append(NewList, get(L));
+    moveNext(L);
+  }
+
+  moveFront(L);
+  moveFront(NewList);
+
+  return NewList;
+}
+
+// set()
+// Overwrites the cursor element with x.
+// Pre: length() > 0, index() >= 0.
+void set(List L, long x) {
+  // if the list is length 0 or the cursor is undefined
+  if (length(L) == 0 || index(L) == -1) {
+    // do nothing
+    return;
+  }
+
+  // direct set of the cursor's value
+  L->cursor->value = x;
+  return;
+
+}

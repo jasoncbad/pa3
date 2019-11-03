@@ -30,3 +30,7 @@ void delete(List L);
 void printList(FILE* out, List L);
 
 List concatList(List A, List B);
+
+// also included for this project
+List copyList(List L);
+void set(List L, long x);
