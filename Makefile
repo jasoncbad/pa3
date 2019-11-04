@@ -14,23 +14,14 @@ ListTest.o : ListTest.c List.h
 List.o : List.c List.h
 	gcc -c -std=c99 -Wall List.c
 
-MatrixTest : MatrixTest.o Matrix.o List.o
-	gcc -o MatrixTest MatrixTest.o Matrix.o List.o
+BigIntegerTest : BigIntegerTest.o BigInteger.o List.o
+	gcc -o BigIntegerTest BigIntegerTest.o BigInteger.o List.o
 
-MatrixClient : MatrixClient.o Matrix.o List.o
-	gcc -o MatrixClient MatrixClient.o Matrix.o List.o
+BigIntegerTest.o : BigIntegerTest.c BigInteger.h
+	gcc -c -std=c99 -Wall BigIntegerTest.c
 
-Sparse : Sparse.o Matrix.o List.o
-	gcc -o Sparse Sparse.o Matrix.o List.o
-
-MatrixTest.o : MatrixTest.c Matrix.h
-	gcc -c -std=c99 -Wall MatrixTest.c
-
-Sparse.o : Sparse.c Matrix.h
-	gcc -c -std=c99 -Wall Sparse.c
-
-Matrix.o :	Matrix.c Matrix.h
+BigInteger.o :	BigInteger.c BigInteger.h
 	gcc -c -std=c99 -Wall Matrix.c
 
 clean :
-	rm -f Lex ListClient ListClient.o List.o MatrixTest MatrixTest.o Matrix.o Sparse Sparse.o
+	rm -f Lex ListTest ListTest.o List.o BigIntegerTest BigIntegerTest.o BigInteger.o

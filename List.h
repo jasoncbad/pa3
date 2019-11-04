@@ -1,8 +1,11 @@
-//
-// Jay Montoya
-// 1742317 - jaanmont
-// pa2
-//
+/* --------------------------------
+
+  List.h | PA3
+  Programmer: Jay Montoya
+  UCSC ID: jaanmont | 1742317
+
+-----------------------------------
+*/
 typedef struct ListObj* List;
 
 List newList(void);
