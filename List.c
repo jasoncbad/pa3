@@ -93,7 +93,7 @@ int length(List L) {
     //printf("List Error: attempt to call length() on NULL object");
     return 0;
   }
-  return(L->length);
+  return L->length;
 }
 
 // index()
