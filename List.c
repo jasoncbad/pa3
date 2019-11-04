@@ -111,8 +111,7 @@ int index(List L) {
 // PRE: length() > 0
 long front(List L) {
   if (length(L) < 1) {
-    //printf("List Error: attempt to access front node when NULL\n");
-    return NULL;
+    printf("List Error: attempt to access front node when NULL\n");
   }
 
   return (L->head)->value;
@@ -123,8 +122,7 @@ long front(List L) {
 // PRE: length() > 0
 long back(List L) {
   if (length(L) < 1) {
-    //printf("List Error: attempt to access back node when size = 0\n");
-    return NULL;
+    printf("List Error: attempt to access back node when size = 0\n");
   }
 
   // return tail element
@@ -423,13 +421,12 @@ void delete(List L) {
 // PRE: length() > 0 and index >= 0
 long get(List L) {
   // check the preconditon before returning
-  if (length(L) > 0 && index(L) >= 0) {
-    return L->cursor->value;
+  if (length(L) == 0 || index(L) == -1) {
+    // if precondition is violated, throw an error and exit
+    printf("List Error: tried get() on NULL list or bad cursor");
   }
 
-  // if precondition is violated, throw an error and exit
-  //printf("List Error: tried get() on NULL list or bad cursor");
-  return NULL;// keeps the compiler happy
+  return L->cursor->value;
 }
 
 // printList()
@@ -443,7 +440,7 @@ void printList(FILE* out, List L) {
   // loop through and print each element to the output file 'Output.txt' in
   // the format specified by pa1.
   while(L->cursor != NULL) {
-    fprintf(out, "%d ", get(L));
+    fprintf(out, "%ld ", get(L));
     moveNext(L);
   }
   printf("\n");
