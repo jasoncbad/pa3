@@ -514,6 +514,8 @@ void insertAfter(List L, long data) {
    }
  }
 
+
+/* getting rid of concatList because i dont need it and it causes leaks 
 // concatList()
 // concatenates the contents of list B onto list A
 List concatList(List A, List B) {
@@ -524,6 +526,7 @@ List concatList(List A, List B) {
    }
    return A;
  }
+ */
 
 // clear()
 // clears the contents of the list

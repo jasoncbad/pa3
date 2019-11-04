@@ -129,21 +129,10 @@ int main(int argc, char* argv[]) {
   printf("\tLIST B: "); printList(stdout, B);
   printf("\t\tlength = %d\n", length(B));
 
-  // concat list
-  printf("\t\tConcatenating B to A, calling it list C...\n");
-  List C = concatList(A,B);
-
-  // print the lists to console
-  printf("\tLIST A: "); printList(stdout, A);
-  printf("\t\tlength = %d\n", length(A));
-  printf("\tLIST B: "); printList(stdout, B);
-  printf("\t\tlength = %d\n", length(B));
-  printf("\tLIST C: "); printList(stdout, C);
-  printf("\t\tlength = %d\n", length(C));
 
   // copying C to D
-  printf("\t\tCopying list C, calling it list D...\n");
-  List D = copyList(C);
+  printf("\t\tCopying list B, calling it list C...\n");
+  List C = copyList(B);
 
   // print the lists to console
   printf("\tLIST A: "); printList(stdout, A);
@@ -152,12 +141,10 @@ int main(int argc, char* argv[]) {
   printf("\t\tlength = %d\n", length(B));
   printf("\tLIST C: "); printList(stdout, C);
   printf("\t\tlength = %d\n", length(C));
-  printf("\tLIST D: "); printList(stdout, D);
-  printf("\t\tlength = %d\n", length(D));
 
   // clear all lists
   printf("\t\tClearing all lists...\n");
-  clear(A); clear(B); clear(C); clear(D);
+  clear(A); clear(B); clear(C);
 
   // print the lists to console
   printf("\tLIST A: "); printList(stdout, A);
@@ -166,8 +153,6 @@ int main(int argc, char* argv[]) {
   printf("\t\tlength = %d\n", length(B));
   printf("\tLIST C: "); printList(stdout, C);
   printf("\t\tlength = %d\n", length(C));
-  printf("\tLIST D: "); printList(stdout, D);
-  printf("\t\tlength = %d\n", length(D));
 
 
   // TODO: Test all that shit and valgrind that shit
@@ -178,12 +163,10 @@ int main(int argc, char* argv[]) {
   freeList(&A);
   freeList(&B);
   freeList(&C);
-  freeList(&D);
 
   A = NULL;
   B = NULL;
   C = NULL;
-  D = NULL;
 
   printf("Test client ended...\n\n");
   return 0;
