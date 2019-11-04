@@ -180,10 +180,10 @@ int main(int argc, char* argv[]) {
   freeList(&C);
   freeList(&D);
 
-  *A = NULL;
-  *B = NULL;
-  *C = NULL;
-  *D = NULL;
+  A = NULL;
+  B = NULL;
+  C = NULL;
+  D = NULL;
 
   printf("Test client ended...\n\n");
   return 0;
