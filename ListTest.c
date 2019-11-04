@@ -31,18 +31,18 @@ int main(int argc, char* argv[]) {
   append(B, 28373);
 
   // print the lists to console
-  printf("\tLIST A: "); printList(A);
+  printf("\tLIST A: "); printList(stdout, A);
   printf("\t\tlength = %d", length(A));
-  printf("\tLIST B: "); printList(B);
+  printf("\tLIST B: "); printList(stdout, B);
   printf("\t\tlength = %d", length(B));
 
   // retrieve some values
   moveFront(A); moveFront(B);
-  printf("\tFront value at A is: %d\n", get(A));
-  printf("\tFront value at B is: %d\n", get(B));
+  printf("\tFront value at A is: %ld\n", get(A));
+  printf("\tFront value at B is: %ld\n", get(B));
   moveBack(A); moveBack(B);
-  printf("\tBack value at A is: %d\n", get(A));
-  printf("\tBack value at B is: %d\n", get(B));
+  printf("\tBack value at A is: %ld\n", get(A));
+  printf("\tBack value at B is: %ld\n", get(B));
 
   // insert before and insert after
   printf("\t\tInserting the value 420 before A's cursor... \n");
@@ -51,9 +51,9 @@ int main(int argc, char* argv[]) {
   insertAfter(B, 420);
 
   // print the lists to console
-  printf("\tLIST A: "); printList(A);
+  printf("\tLIST A: "); printList(stdout, A);
   printf("\t\tlength = %d\n", length(A));
-  printf("\tLIST B: "); printList(B);
+  printf("\tLIST B: "); printList(stdout, B);
   printf("\t\tlength = %d\n", length(B));
 
 
@@ -72,9 +72,9 @@ int main(int argc, char* argv[]) {
   deleteFront(B); deleteBack(B);
 
   // print the lists to console
-  printf("\tLIST A: "); printList(A);
+  printf("\tLIST A: "); printList(stdout, A);
   printf("\t\tlength = %d\n", length(A));
-  printf("\tLIST B: "); printList(B);
+  printf("\tLIST B: "); printList(stdout, B);
   printf("\t\tlength = %d\n", length(B));
 
   // delete the second element in each list
@@ -84,9 +84,9 @@ int main(int argc, char* argv[]) {
   delete(A); delete(B);
 
   // print the lists to console
-  printf("\tLIST A: "); printList(A);
+  printf("\tLIST A: "); printList(stdout, A);
   printf("\t\tlength = %d\n", length(A));
-  printf("\tLIST B: "); printList(B);
+  printf("\tLIST B: "); printList(stdout, B);
   printf("\t\tlength = %d\n", length(B));
 
   // test our new set method
@@ -95,9 +95,9 @@ int main(int argc, char* argv[]) {
   moveFront(B); set(B, 0);
 
   // print the lists to console
-  printf("\tLIST A: "); printList(A);
+  printf("\tLIST A: "); printList(stdout, A);
   printf("\t\tlength = %d\n", length(A));
-  printf("\tLIST B: "); printList(B);
+  printf("\tLIST B: "); printList(stdout, B);
   printf("\t\tlength = %d\n", length(B));
 
   // clear Lists
@@ -105,9 +105,9 @@ int main(int argc, char* argv[]) {
   clear(A); clear(B);
 
   // print the lists to console
-  printf("\tLIST A: "); printList(A);
+  printf("\tLIST A: "); printList(stdout, A);
   printf("\t\tlength = %d\n", length(A));
-  printf("\tLIST B: "); printList(B);
+  printf("\tLIST B: "); printList(stdout, B);
   printf("\t\tlength = %d\n", length(B));
 
   // prepend elements
@@ -115,9 +115,9 @@ int main(int argc, char* argv[]) {
   prepend(A,1); prepend(B,1);
 
   // print the lists to console
-  printf("\tLIST A: "); printList(A);
+  printf("\tLIST A: "); printList(stdout, A);
   printf("\t\tlength = %d\n", length(A));
-  printf("\tLIST B: "); printList(B);
+  printf("\tLIST B: "); printList(stdout, B);
   printf("\t\tlength = %d\n", length(B));
 
   // concat list
@@ -125,11 +125,11 @@ int main(int argc, char* argv[]) {
   List C = concatList(A,B);
 
   // print the lists to console
-  printf("\tLIST A: "); printList(A);
+  printf("\tLIST A: "); printList(stdout, A);
   printf("\t\tlength = %d\n", length(A));
-  printf("\tLIST B: "); printList(B);
+  printf("\tLIST B: "); printList(stdout, B);
   printf("\t\tlength = %d\n", length(B));
-  printf("\tLIST C: "); printList(C);
+  printf("\tLIST C: "); printList(stdout, C);
   printf("\t\tlength = %d\n", length(C));
 
   // copying C to D
@@ -137,13 +137,13 @@ int main(int argc, char* argv[]) {
   List D = copyList(C);
 
   // print the lists to console
-  printf("\tLIST A: "); printList(A);
+  printf("\tLIST A: "); printList(stdout, A);
   printf("\t\tlength = %d\n", length(A));
-  printf("\tLIST B: "); printList(B);
+  printf("\tLIST B: "); printList(stdout, B);
   printf("\t\tlength = %d\n", length(B));
-  printf("\tLIST C: "); printList(C);
+  printf("\tLIST C: "); printList(stdout, C);
   printf("\t\tlength = %d\n", length(C));
-  printf("\tLIST D: "); printList(D);
+  printf("\tLIST D: "); printList(stdout, D);
   printf("\t\tlength = %d\n", length(D));
 
   // clear all lists
@@ -151,13 +151,13 @@ int main(int argc, char* argv[]) {
   clear(A); clear(B); clear(C); clear(D);
 
   // print the lists to console
-  printf("\tLIST A: "); printList(A);
+  printf("\tLIST A: "); printList(stdout, A);
   printf("\t\tlength = %d\n", length(A));
-  printf("\tLIST B: "); printList(B);
+  printf("\tLIST B: "); printList(stdout, B);
   printf("\t\tlength = %d\n", length(B));
-  printf("\tLIST C: "); printList(C);
+  printf("\tLIST C: "); printList(stdout, C);
   printf("\t\tlength = %d\n", length(C));
-  printf("\tLIST D: "); printList(D);
+  printf("\tLIST D: "); printList(stdout, D);
   printf("\t\tlength = %d\n", length(D));
 
 
