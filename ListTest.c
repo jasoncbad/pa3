@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
   List B = newList();
 
   // add some values
-  printf("\tList A/B created.. adding values...");
+  printf("\tList A/B created..\n\tadding values...\n");
   append(A, 1337);
   append(A, 123456789);
   append(A, 987654321);
@@ -32,9 +32,9 @@ int main(int argc, char* argv[]) {
 
   // print the lists to console
   printf("\tLIST A: "); printList(stdout, A);
-  printf("\t\tlength = %d", length(A));
+  printf("\t\tlength = %d\n", length(A));
   printf("\tLIST B: "); printList(stdout, B);
-  printf("\t\tlength = %d", length(B));
+  printf("\t\tlength = %d\n", length(B));
 
   // retrieve some values
   moveFront(A); moveFront(B);
@@ -44,11 +44,20 @@ int main(int argc, char* argv[]) {
   printf("\tBack value at A is: %ld\n", get(A));
   printf("\tBack value at B is: %ld\n", get(B));
 
+  // cursor values
+  printf("\t\t\tA cursor index = %d\n", index(A));
+  printf("\t\t\tB cursor index = %d\n", index(B));
+
+
   // insert before and insert after
   printf("\t\tInserting the value 420 before A's cursor... \n");
   insertBefore(A, 420);
   printf("\t\tInserting the value 420 after B's cursor... \n");
   insertAfter(B, 420);
+
+  // cursor values
+  printf("\t\t\tA cursor index = %d\n", index(A));
+  printf("\t\t\tB cursor index = %d\n", index(B));
 
   // print the lists to console
   printf("\tLIST A: "); printList(stdout, A);
