@@ -434,6 +434,9 @@ long get(List L) {
 // string representation of L as a string sequence of space-seperated integers
 void printList(FILE* out, List L) {
 
+  // save the state of the cursor.. we need to restore this..
+  int previous_state = index(L);
+
   // move the cursor to the front of L
   moveFront(L);
 
@@ -444,6 +447,14 @@ void printList(FILE* out, List L) {
     moveNext(L);
   }
   printf("\n");
+
+  // restore the cursor state
+  moveFront(L);
+  for (int i = 0; i < previous_state; i++) {
+    // move the cursor forward one
+    moveNext(L);
+  }
+  // cursor state restored
 }
 
 
