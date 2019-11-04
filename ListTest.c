@@ -52,27 +52,124 @@ int main(int argc, char* argv[]) {
 
   // print the lists to console
   printf("\tLIST A: "); printList(A);
-  printf("\t\tlength = %d", length(A));
+  printf("\t\tlength = %d\n", length(A));
   printf("\tLIST B: "); printList(B);
-  printf("\t\tlength = %d", length(B));
+  printf("\t\tlength = %d\n", length(B));
 
 
-  // TODO: write tests for clear() movePrev() moveNext()
-  //    prepend(), deleteFront(), deleteBack(), delete()
-  //    concatList(), copyList(), set()
+  // movePrev() moveNext() tests
+  movePrev(A); // move A back to the same index as B.
+  printf("\tA index = %d\n", index(A));
+  printf("\tB index = %d (should be the same)\n", index(B));
+  moveNext(A); moveNext(B);
+  moveNext(A); moveNext(B); // cursors should now be undefined
+  printf("Now...\n\tA index = %d", index(A));
+  printf("\tB index = %d", index(B));
 
-  // Test all that shit and valgrind that shit
+  // delete the back and front elemenent
+  printf("\t\tDeleting front and back elements in both lists...\n");
+  deleteFront(A); deleteBack(A);
+  deleteFront(B); deleteBack(B);
 
-  // START ON BIGINTEGER RIGHT AWAY YOU PIECE OF SHIT
+  // print the lists to console
+  printf("\tLIST A: "); printList(A);
+  printf("\t\tlength = %d\n", length(A));
+  printf("\tLIST B: "); printList(B);
+  printf("\t\tlength = %d\n", length(B));
+
+  // delete the second element in each list
+  printf("\t\tDeleting the second element in each list...\n");
+  moveFront(A); moveNext(A);
+  moveFront(B); moveNext(B);
+  delete(A); delete(B);
+
+  // print the lists to console
+  printf("\tLIST A: "); printList(A);
+  printf("\t\tlength = %d\n", length(A));
+  printf("\tLIST B: "); printList(B);
+  printf("\t\tlength = %d\n", length(B));
+
+  // test our new set method
+  printf("\t\tUsing our new set() method to set the first element to 0\n");
+  moveFront(A); set(A, 0);
+  moveFront(B); set(B, 0);
+
+  // print the lists to console
+  printf("\tLIST A: "); printList(A);
+  printf("\t\tlength = %d\n", length(A));
+  printf("\tLIST B: "); printList(B);
+  printf("\t\tlength = %d\n", length(B));
+
+  // clear Lists
+  printf("\t\tClearing lists...\n")
+  clear(A); clear(B);
+
+  // print the lists to console
+  printf("\tLIST A: "); printList(A);
+  printf("\t\tlength = %d\n", length(A));
+  printf("\tLIST B: "); printList(B);
+  printf("\t\tlength = %d\n", length(B));
+
+  // prepend elements
+  printf("\t\tPrepending element 1 to A and B...\n");
+  prepend(A,1); prepend(B,1);
+
+  // print the lists to console
+  printf("\tLIST A: "); printList(A);
+  printf("\t\tlength = %d\n", length(A));
+  printf("\tLIST B: "); printList(B);
+  printf("\t\tlength = %d\n", length(B));
+
+  // concat list
+  printf("\t\tConcatenating B to A, calling it list C...\n");
+  List C = concatList(A,B);
+
+  // print the lists to console
+  printf("\tLIST A: "); printList(A);
+  printf("\t\tlength = %d\n", length(A));
+  printf("\tLIST B: "); printList(B);
+  printf("\t\tlength = %d\n", length(B));
+  printf("\tLIST C: "); printList(C);
+  printf("\t\tlength = %d\n", length(C));
+
+  // copying C to D
+  printf("\t\tCopying list C, calling it list D...\n");
+  List D = copyList(C);
+
+  // print the lists to console
+  printf("\tLIST A: "); printList(A);
+  printf("\t\tlength = %d\n", length(A));
+  printf("\tLIST B: "); printList(B);
+  printf("\t\tlength = %d\n", length(B));
+  printf("\tLIST C: "); printList(C);
+  printf("\t\tlength = %d\n", length(C));
+  printf("\tLIST D: "); printList(D);
+  printf("\t\tlength = %d\n", length(D));
+
+  // clear all lists
+  printf("\t\tClearing all lists...\n");
+  clear(A); clear(B); clear(C); clear(D);
+
+  // print the lists to console
+  printf("\tLIST A: "); printList(A);
+  printf("\t\tlength = %d\n", length(A));
+  printf("\tLIST B: "); printList(B);
+  printf("\t\tlength = %d\n", length(B));
+  printf("\tLIST C: "); printList(C);
+  printf("\t\tlength = %d\n", length(C));
+  printf("\tLIST D: "); printList(D);
+  printf("\t\tlength = %d\n", length(D));
 
 
+  // TODO: Test all that shit and valgrind that shit
 
-
-
+  // TODO: START ON BIGINTEGER RIGHT AWAY YOU PIECE OF SHIT
 
   // clean up our mess
   freeList(&A);
   freeList(&B);
+  freeList(&C);
+  freeList(&D);
 
   printf("Test client ended...\n\n");
   return 0;
