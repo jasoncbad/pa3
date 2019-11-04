@@ -531,6 +531,7 @@ void clear(List L) {
    while(length(L) > 0) {
      deleteFront(L);
    }
+   L->length = 0;
    return;
  }
 
