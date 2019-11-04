@@ -101,7 +101,7 @@ int main(int argc, char* argv[]) {
   printf("\t\tlength = %d\n", length(B));
 
   // clear Lists
-  printf("\t\tClearing lists...\n")
+  printf("\t\tClearing lists...\n");
   clear(A); clear(B);
 
   // print the lists to console
