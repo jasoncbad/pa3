@@ -72,7 +72,7 @@ int main(int argc, char* argv[]) {
   printf("\tB index = %d (should be the same)\n", index(B));
   moveNext(A); moveNext(B);
   moveNext(A); moveNext(B); // cursors should now be undefined
-  printf("Now...\n\tA index = %d", index(A));
+  printf("\tNow...\n\tA index = %d\n", index(A));
   printf("\tB index = %d", index(B));
 
   // delete the back and front elemenent
@@ -179,6 +179,11 @@ int main(int argc, char* argv[]) {
   freeList(&B);
   freeList(&C);
   freeList(&D);
+
+  *A = NULL;
+  *B = NULL;
+  *C = NULL;
+  *D = NULL;
 
   printf("Test client ended...\n\n");
   return 0;
