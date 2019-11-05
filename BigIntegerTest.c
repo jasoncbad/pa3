@@ -23,10 +23,6 @@ int main(int argc, char* argv[]) {
 
   A = stringToBigInteger(myString9);
 
-  free(myString9);
-  *myString9 = NULL;
-
-
 
   // free memory associated with the big integer
   freeBigInteger(&A);

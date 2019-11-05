@@ -184,7 +184,7 @@ BigInteger stringToBigInteger(char* s) {
   cursorChar = NULL;
 
   printf("\tstringToBigInteger() ended...\n");
-  return NULL;
+  return A;
 }
 
 // copy()
