@@ -9,6 +9,8 @@
 -----------------------------------
 */
 #include <stdio.h>
+#include <stdlib.h
+>
 #include "BigInteger.h"
 
 // main
@@ -23,7 +25,7 @@ int main(int argc, char* argv[]) {
   A = stringToBigInteger(myString9);
 
   free(myString9);
-  myString9 = NULL;
+  *myString9 = NULL;
 
 
 
