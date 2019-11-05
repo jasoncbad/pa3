@@ -49,7 +49,7 @@ void freeBigInteger(BigInteger* pN) {
   if (pN != NULL && *pN != NULL) {
     // nothing needs to be done about sign.
     // but all heap memory associated with magnitude must be freed.
-    freeList(&(A->magnitude));
+    freeList(&((*pN)->magnitude));
 
     // the pointer pN must also be freed and set to NULL
     free(*pN);
