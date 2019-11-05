@@ -131,7 +131,7 @@ BigInteger stringToBigInteger(char* s) {
 
   if (*cursorChar == '-') {
     A->sign = -1;
-  } else if (*cursorChar == "+") {
+  } else if (*cursorChar == '+') {
     A->sign = 1;
   } else {
     // assume positive because according to the precondition, the only other
@@ -141,12 +141,12 @@ BigInteger stringToBigInteger(char* s) {
 
   // After the first character has been observed, shave off any leading zeroes.
   // To do this,first make sure we get to the first non-"-"/"+" char.
-  if (*cursorChar == '-' || *cursorChar == "+") {
+  if (*cursorChar == '-' || *cursorChar == '+') {
     cursorChar = cursorChar + 1;
   }
 
   // move the cursor char pointer to point to the first actual number.
-  while (*cursorChar != 0) {
+  while (*cursorChar != '0') {
     cursorChar = cursorChar + 1;
   }
 
@@ -156,7 +156,7 @@ BigInteger stringToBigInteger(char* s) {
 
   // Run through all meaningful characters and count how many there are
   int length = 0;
-  while(*cursorChar != "\0") {
+  while(*cursorChar != '\0') {
     length++;
     cursorChar = cursorChar + 1;
   }
@@ -183,8 +183,8 @@ BigInteger stringToBigInteger(char* s) {
 
   // clean up pointers
   free(cursorChar);
-  *cursorChar = NULL;
-  
+  cursorChar = NULL;
+
   printf("\tstringToBigInteger() ended...\n");
   return NULL;
 }
