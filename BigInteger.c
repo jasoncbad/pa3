@@ -180,6 +180,8 @@ BigInteger stringToBigInteger(char* s) {
   //    - Case where the first grouping starts with zero/zeroes. Already
   //      handled by the beginning of this function.
 
+  free(cursorChar);
+  cursorChar = NULL;
 
   printf("\tstringToBigInteger() ended...\n");
   return NULL;
