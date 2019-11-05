@@ -182,7 +182,7 @@ BigInteger stringToBigInteger(char* s) {
 
 
   // clean up pointers
-  free(cursorChar);
+  free(&cursorChar);
   cursorChar = NULL;
 
   printf("\tstringToBigInteger() ended...\n");
