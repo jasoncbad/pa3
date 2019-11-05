@@ -146,7 +146,7 @@ BigInteger stringToBigInteger(char* s) {
   }
 
   // move the cursor char pointer to point to the first actual number.
-  while (*cursorChar != '0') {
+  while (*cursorChar == '0') {
     cursorChar = cursorChar + 1;
   }
 
