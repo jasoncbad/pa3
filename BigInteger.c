@@ -163,9 +163,27 @@ BigInteger stringToBigInteger(char* s) {
 
   printf("\t\tNumber of meaningful digits in the string is: %d\n", length);
 
+
+  if (length == 0) {
+    printf("\tcould not build bigInt.. no meaningful digits in string!\n");
+    return A;
+  }
+
   // Determine the highest power of the list by ceiling[(length-1) / POWER]
   // the most significat place is now the 10^new_power's place.
   // add +1 to this new_power to get how many entries our list should have.
+  int new_power = (length - 1) / POWER;
+  int num_entries
+  if (new_power * POWER < (length - 1)) ++new_power; // obtain the ceiling
+  num_entries = new_power + 1;
+
+  int new_power = (length - 1) / POWER;
+  int num_entries
+  if (new_power * POWER < (length - 1)) ++new_power; // obtain the ceiling
+  num_entries = new_power + 1;
+
+  printf("\t\tThe most significant place for this BigInteger in base %d is the 10^%d's place...\n", BASE, new_power);
+  printf("\t\tThe number of nodes our list is then: %d\n", num_entries);
 
   // count from 1 to (num_entries) in a for loop and perform the following
   // 1. The first iteration is special, because the most significant 'digit'
