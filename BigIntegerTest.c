@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
   // create a big integer list
   BigInteger A;
 
-  char myString[] = "-1020939";
+  char myString[] = "-000010209390";
 
   A = stringToBigInteger(myString);
 
