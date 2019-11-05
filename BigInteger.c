@@ -37,7 +37,7 @@ BigInteger newBigInteger() {
     A->sign = 0;
 
     // create the list that represents the magnitude
-    magnitude = newList();
+    A->magnitude = newList();
 
     return A;
 }
@@ -49,7 +49,7 @@ void freeBigInteger(BigInteger* pN) {
   if (pN != NULL && *pN != NULL) {
     // nothing needs to be done about sign.
     // but all heap memory associated with magnitude must be freed.
-    freeList(magnitude);
+    freeList(&(A->magnitude));
 
     // the pointer pN must also be freed and set to NULL
     free(*pN);
