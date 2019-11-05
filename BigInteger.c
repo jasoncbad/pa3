@@ -11,6 +11,15 @@
 #include "BigInteger.h"
 #include "List.h"
 
+// --------------------------------------------
+// define statements of base and power
+// these macros will satisfy BASE = 10^POWER
+// --------------------------------------------
+#define BASE 100
+
+// power must be 0 <= POWER <= 9
+#define POWER 2
+
 // definition of a BigInteger object
 typedef struct BigIntegerObj {
   // A BigInteger is represented by its sign (int which is -1, 1, or 0). And
@@ -65,8 +74,7 @@ void freeBigInteger(BigInteger* pN) {
 // Returns -1 if N is negative, 1 if N is positive, and 0 if N is in the zero
 // state.
 int sign(BigInteger N) {
-
-  return 0;
+  return N->sign;
 }
 
 // compare()
@@ -112,7 +120,72 @@ void negate(BigInteger N) {
 // PRE: s is a non-empty string containing only base ten digits {0,1,2..,9}
 //  and an optional sign {+, -} prefix.
 BigInteger stringToBigInteger(char* s) {
+  printf("\tstringToBigInteger() started...\n");
 
+  // create a BigInteger object to return
+  BigInteger A = newBigInteger();
+
+  // First determine the sign by observing the first character in the string
+  char* cursorChar = s;
+  printf("\t\tFirst char in the given string is: %c\n", *cursorChar);
+
+  if (*cursorChar == '-') {
+    A->sign = -1;
+  } else if (*cursorChar == "+") {
+    A->sign = 1;
+  } else {
+    // assume positive because according to the precondition, the only other
+    // possible thing this char could be is an integer...
+    A->sign = 1;
+  }
+
+  // After the first character has been observed, shave off any leading zeroes.
+  // To do this,first make sure we get to the first non-"-"/"+" char.
+  if (*cursorChar == '-' || *cursorChar == "+") {
+    cursorChar = cursorChar + 1;
+  }
+
+  // move the cursor char pointer to point to the first actual number.
+  while (*cursorChar != 0) {
+    cursorChar = cursorChar + 1;
+  }
+
+  printf("\t\tFirst actual number in the given string is: %c\n", *cursorChar);
+
+
+
+  // Run through all meaningful characters and count how many there are
+  int length = 0;
+  while(*cursorChar != "\0") {
+    length++;
+    cursorChar = cursorChar + 1;
+  }
+
+  printf("\t\tNumber of meaningful digits in the string is: %d\n", length);
+
+  // Determine the highest power of the list by ceiling[(length-1) / POWER]
+  // the most significat place is now the 10^new_power's place.
+  // add +1 to this new_power to get how many entries our list should have.
+
+  // count from 1 to (num_entries) in a for loop and perform the following
+  // 1. The first iteration is special, because the most significant 'digit'
+  //      may have less than POWER digits. Take the first (length(s) % POWER)
+  //      characters off the front of the string and create the first entry.
+  // 2. The remaining characters in the string should be able to be picked off
+  //      in groupings of POWER to be appended to the list.
+  //
+  // NOTES:
+  //    - Case where the grouping starts with zero or zeroes. Should be handled
+  //      by the typecasting mechanism.
+  //    - Case where the first grouping starts with zero/zeroes. Already
+  //      handled by the beginning of this function.
+
+
+  // clean up pointers
+  free(cursorChar);
+  *cursorChar = NULL;
+  
+  printf("\tstringToBigInteger() ended...\n");
   return NULL;
 }
 

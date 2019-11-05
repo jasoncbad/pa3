@@ -15,12 +15,14 @@
 int main(int argc, char* argv[]) {
 
   // create a big integer list
-  BigInteger A = newBigInteger();
+  BigInteger A;
 
+  char myString[] = "-1020939";
 
+  A = stringToBigInteger(myString);
 
   // free memory associated with the big integer
   freeBigInteger(&A);
-  
+
   return 0;
 }
