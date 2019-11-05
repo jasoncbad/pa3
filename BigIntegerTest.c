@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
   char myString9[] = "-0";
   char myString10[] = "-11";
 
-  A = stringToBigInteger(myString);
+  A = stringToBigInteger(myString9);
 
   // free memory associated with the big integer
   freeBigInteger(&A);
