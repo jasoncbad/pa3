@@ -173,12 +173,7 @@ BigInteger stringToBigInteger(char* s) {
   // the most significat place is now the 10^new_power's place.
   // add +1 to this new_power to get how many entries our list should have.
   int new_power = (length - 1) / POWER;
-  int num_entries
-  if (new_power * POWER < (length - 1)) ++new_power; // obtain the ceiling
-  num_entries = new_power + 1;
-
-  int new_power = (length - 1) / POWER;
-  int num_entries
+  int num_entries;
   if (new_power * POWER < (length - 1)) ++new_power; // obtain the ceiling
   num_entries = new_power + 1;
 
