@@ -21,7 +21,7 @@ BigIntegerTest.o : BigIntegerTest.c BigInteger.h
 	gcc -c -std=c99 -Wall BigIntegerTest.c
 
 BigInteger.o :	BigInteger.c BigInteger.h
-	gcc -c -std=c99 -Wall Matrix.c
+	gcc -c -std=c99 -Wall BigInteger.c
 
 clean :
 	rm -f Lex ListTest ListTest.o List.o BigIntegerTest BigIntegerTest.o BigInteger.o
