@@ -181,10 +181,6 @@ BigInteger stringToBigInteger(char* s) {
   //      handled by the beginning of this function.
 
 
-  // clean up pointers
-  free(&cursorChar);
-  cursorChar = NULL;
-
   printf("\tstringToBigInteger() ended...\n");
   return NULL;
 }
