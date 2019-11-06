@@ -193,6 +193,53 @@ BigInteger stringToBigInteger(char* s) {
   //    - Case where the first grouping starts with zero/zeroes. Already
   //      handled by the beginning of this function.
 
+  // make sure the cursor is at the first meaningful digit
+  // SO: set cursor to the beginning
+  cursorChar = s;
+  // THEN: skip -+ if any
+  if (*cursorChar == '-' || *cursorChar == '+') {
+    cursorChar = cursorChar + 1;
+  }
+  // THEN: move the cursor char pointer to point to the first actual number.
+  while (*cursorChar == '0') {
+    cursorChar = cursorChar + 1;
+  }
+
+  // start building!
+  for (int i = 1 ; i <= num_entries; i++) {
+    char str[9]; // dummy holder for our values
+
+    // special first case - when i = 1 and there is not a consistent grouping
+    // in the highest power.
+    if (i == 1 && (length % POWER != 0)) {
+      int numDigits = length % POWER; // number of digits we need to place in
+                                      // the most significant entry
+      // take these first characters off the front
+      for (int j = 1; j <= numDigits; j++) {
+        sprintf(str, "%d", (*cursorChar) - 48 ); // use sprintf to load up the str
+        cursorChar++;
+      }
+      long result = strtol(str, NULL, 10); // this result stores the long we need
+
+      // create the first entry
+      append(A->magnitude, result);
+      continue;
+    }
+
+    // OTHERWISE: pick off normal groupings!
+    for (int j = 1; j <= POWER; j++) {
+      sprintf(str, "%d", (*cursorChar) - 48 ); // use sprintf to load up the str
+      cursorChar++;
+    }
+    long result = strtol(str, NULL, 10);
+
+    // create the entry
+    append(A->magnitude, result);
+
+  } // end of for loop
+
+  printf("\tLIST CREATED: "); printList(stdout, A->magnitude);
+
   printf("\tstringToBigInteger() ended...\n");
   return A;
 }
