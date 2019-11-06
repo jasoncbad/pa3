@@ -245,7 +245,7 @@ BigInteger stringToBigInteger(char* s) {
 
   } // end of for loop
 
-  //printf("\tLIST CREATED: "); printList(stdout, A->magnitude);
+  printf("\tLIST CREATED: "); printList(stdout, A->magnitude);
 
   printf("\tstringToBigInteger() ended...\n");
   return A;
