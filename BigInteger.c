@@ -88,8 +88,9 @@ int compare(BigInteger A, BigInteger B) {
 // equals()
 // Return true (1) if A and B are equal, false (0) otherwise.
 int equals(BigInteger A, BigInteger B) {
+  if (A->sign != B->sign) return 0;
 
-  return 0;
+  return equals(A->magnitude, B->magnitude);
 }
 
 // -----------------------------------------------------------------

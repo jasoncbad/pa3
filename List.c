@@ -515,7 +515,7 @@ void insertAfter(List L, long data) {
  }
 
 
-/* getting rid of concatList because i dont need it and it causes leaks 
+/* getting rid of concatList because i dont need it and it causes leaks
 // concatList()
 // concatenates the contents of list B onto list A
 List concatList(List A, List B) {
@@ -571,4 +571,32 @@ void set(List L, long x) {
   L->cursor->value = x;
   return;
 
+}
+
+// equals(List A, List B)
+// returns 0 or 1 based on the equality/state of two given lists (A and B)
+int equals(List A, List B) {
+  // set cursors to the front
+  moveFront(A);
+  moveFront(B);
+
+  // loop to move through cursors until one or both become undefined
+  while(A->cursor != NULL && B->cursor != NULL) {
+
+    // direct element comparison
+    if (get(A) != get(B))
+      return 0;
+
+    // move the cursors
+    moveNext(A);
+    moveNext(B);
+  }
+
+  // if only one became undefined, return false
+  if (A->cursor != NULL || B->cursor != NULL) {
+    return 0;
+  }
+
+  // return true because both cursors went undefined at the same time
+  return 1;
 }
