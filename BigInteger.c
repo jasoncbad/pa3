@@ -213,7 +213,7 @@ BigInteger stringToBigInteger(char* s) {
 
   // start building!
   for (int i = 1 ; i <= num_entries; i++) {
-    char str[9]; // dummy holder for our values
+    char str[9] = { '\0' }; // dummy holder for our values
 
     // special first case - when i = 1 and there is not a consistent grouping
     // in the highest power.
