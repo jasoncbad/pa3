@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
   BigInteger A;
 
 
-  char myString9[] = "-123456789";
+  char myString9[] = "-1234567891";
 
   A = stringToBigInteger(myString9);
 
