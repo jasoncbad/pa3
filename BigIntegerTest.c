@@ -23,6 +23,7 @@ int main(int argc, char* argv[]) {
 
   A = stringToBigInteger(myString9);
 
+  makeZero(A);
 
   // free memory associated with the big integer
   freeBigInteger(&A);

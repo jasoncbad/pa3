@@ -99,7 +99,8 @@ int equals(BigInteger A, BigInteger B) {
 // makeZero()
 // Re-sets N to the zero state.
 void makeZero(BigInteger N) {
-
+  N->sign = 0;
+  clear(N->magnitude);
   return;
 }
 
@@ -107,7 +108,11 @@ void makeZero(BigInteger N) {
 // Reverses the sign of N: positive <--> negative. Does nothing if N is in the
 // zero state.
 void negate(BigInteger N) {
-
+  if (N->sign == -1) {
+    N->sign = 1;
+  } else if (N->sign == 1) {
+    N->sign = -1;
+  }
   return;
 }
 
@@ -240,7 +245,7 @@ BigInteger stringToBigInteger(char* s) {
 
   } // end of for loop
 
-  printf("\tLIST CREATED: "); printList(stdout, A->magnitude);
+  //printf("\tLIST CREATED: "); printList(stdout, A->magnitude);
 
   printf("\tstringToBigInteger() ended...\n");
   return A;
