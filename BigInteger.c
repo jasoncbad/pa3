@@ -16,10 +16,10 @@
 // define statements of base and power
 // these macros will satisfy BASE = 10^POWER
 // --------------------------------------------
-#define BASE 100
+#define BASE 1000000000
 
 // power must be 0 <= POWER <= 9
-#define POWER 2
+#define POWER 9
 
 // definition of a BigInteger object
 typedef struct BigIntegerObj {
@@ -175,9 +175,7 @@ BigInteger stringToBigInteger(char* s) {
   // add +1 to this new_power to get how many entries our list should have.
   int new_power = (length - 1) / POWER;
   int num_entries;
-  //if (new_power * POWER < (length - 1)) {
-  //  new_power++; // obtain the ceiling
-  //}
+
   num_entries = new_power + 1;
 
   printf("\t\tThe most significant place for this BigInteger in base %d is the 10^%d's place...\n", BASE, new_power);
