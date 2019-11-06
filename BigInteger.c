@@ -216,7 +216,7 @@ BigInteger stringToBigInteger(char* s) {
                                       // the most significant entry
       // take these first characters off the front
       for (int j = 1; j <= numDigits; j++) {
-        sprintf(str, "%d", (*cursorChar) - 48 ); // use sprintf to load up the str
+        sprintf(str + strlen(str), "%d", (*cursorChar) - 48 ); // use sprintf to load up the str
         cursorChar++;
       }
       long result = strtol(str, NULL, 10); // this result stores the long we need
@@ -228,7 +228,7 @@ BigInteger stringToBigInteger(char* s) {
 
     // OTHERWISE: pick off normal groupings!
     for (int j = 1; j <= POWER; j++) {
-      sprintf(str, "%d", (*cursorChar) - 48 ); // use sprintf to load up the str
+      sprintf(str + strlen(str), "%d", (*cursorChar) - 48 ); // use sprintf to load up the str
       cursorChar++;
     }
     long result = strtol(str, NULL, 10);
