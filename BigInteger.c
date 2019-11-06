@@ -81,6 +81,51 @@ int sign(BigInteger N) {
 // compare()
 // Returns -1 if A<B, 1 if A>B, and 0 if A=B.
 int compare(BigInteger A, BigInteger B) {
+  // compare the signs and try to find an exit case between them
+  if (sign(A) < sign(B)) {
+    return -1;
+  } else if (sign(B) < sign(A)) {
+    return 1;
+  } else {
+    // compare the number of digits and also try to find an exit case
+    if (length(A->magnitude) > length(B->magnitude)) {
+      return 1;
+    } else if (length(B->magnitude) > length(A->magnitude)) {
+      return -1;
+    } else {
+      // the lists have the same length.. we must compare each digit
+      // we need to use the cursors for this. So I will save the state of
+      // each cursor
+      int a_cursor_state, b_cursor_state;
+      a_cursor_state = index(A->magnitude);
+      b_cursor_state = index(B->magnitude);
+
+      // move cursors to the front
+      moveFront(A->magnitude); moveFront(B->magnitude);
+
+      // while cursors are defined
+      while ((index(A->magnitude) != -1) && (index(B->magnitude) != -1)) {
+        // compare the elements directly
+        long elementA = get(A->magnitude);
+        long elementB = get(B->magnitude);
+
+        if (elementA < elementB) {
+          return -1;
+        } else if (elementB < elementA) {
+          return 1;
+        } else {
+          // do nothing
+        }
+        // move the cursors next
+        moveNext(A->magnitude); moveNext(B->magnitude);
+      }
+
+      // weve gone through all digits and did not find any differences
+      return 0;
+    }
+
+  }
+
 
   return 0;
 }
@@ -256,7 +301,18 @@ BigInteger stringToBigInteger(char* s) {
 // Returns a reference to a new BigInteger object in the same state as N.
 BigInteger copy(BigInteger N) {
 
-  return NULL;
+  // create a new BigInteger which we will return
+  BigInteger A = newBigInteger();
+
+  // copy over the sign of list N
+  A->sign = N->sign;
+
+  // copy over the list of N into a new list representing the magnitude of A.
+  A->magnitude = copy(N->magnitude);
+
+  // return the deep copy
+  // we have allocated HEAP data for a new BigInteger, and also for a new List.
+  return A;
 }
 
 // add()
