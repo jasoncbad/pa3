@@ -21,12 +21,18 @@ int main(int argc, char* argv[]) {
   // string to test on
   char myString9[] = "6523485630758234007488392857982374523487612398700554";
 
-
   // create the big integer
   A = stringToBigInteger(myString9);
 
+  printBigInteger(stdout, A);
+
   negate(A);    // test negate
+
+  printBigInteger(stdout, A);
+
   makeZero(A);  // test makeZero
+
+  printBigInteger(stdout, A);
 
   // free memory associated with the big integer
   freeBigInteger(&A);
