@@ -11,7 +11,7 @@
 #include <string.h>
 #include "BigInteger.h"
 #include "List.h"
-#include <math.h> 
+#include <Math.h> 
 
 // --------------------------------------------
 // define statements of base and power
