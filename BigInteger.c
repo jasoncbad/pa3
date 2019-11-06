@@ -228,6 +228,7 @@ BigInteger stringToBigInteger(char* s) {
     }
 
     // OTHERWISE: pick off normal groupings!
+    strncpy(str, "", sizeof(str));
     for (int j = 1; j <= POWER; j++) {
       sprintf(str + strlen(str), "%d", (*cursorChar) - 48 ); // use sprintf to load up the str
       cursorChar++;
