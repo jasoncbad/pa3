@@ -16,10 +16,10 @@
 // define statements of base and power
 // these macros will satisfy BASE = 10^POWER
 // --------------------------------------------
-#define BASE 100
+#define BASE 1000
 
 // power must be 0 <= POWER <= 9
-#define POWER 2
+#define POWER 3
 
 // definition of a BigInteger object
 typedef struct BigIntegerObj {
