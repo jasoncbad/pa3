@@ -37,4 +37,4 @@ void printList(FILE* out, List L);
 // also included for this project
 List copyList(List L);
 void set(List L, long x);
-int equals(List A, List B);
+int listEquals(List A, List B);

@@ -575,7 +575,7 @@ void set(List L, long x) {
 
 // equals(List A, List B)
 // returns 0 or 1 based on the equality/state of two given lists (A and B)
-int equals(List A, List B) {
+int listEquals(List A, List B) {
   // set cursors to the front
   moveFront(A);
   moveFront(B);

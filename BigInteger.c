@@ -90,7 +90,7 @@ int compare(BigInteger A, BigInteger B) {
 int equals(BigInteger A, BigInteger B) {
   if (A->sign != B->sign) return 0;
 
-  return equals(A->magnitude, B->magnitude);
+  return listEquals(A->magnitude, B->magnitude);
 }
 
 // -----------------------------------------------------------------
