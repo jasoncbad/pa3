@@ -81,17 +81,18 @@ int sign(BigInteger N) {
 // compare()
 // Returns -1 if A<B, 1 if A>B, and 0 if A=B.
 int compare(BigInteger A, BigInteger B) {
+  int returnThis = 0;
   // compare the signs and try to find an exit case between them
   if (sign(A) < sign(B)) {
-    return -1;
+    returnThis = -1;
   } else if (sign(B) < sign(A)) {
-    return 1;
+    returnThis = 1;
   } else {
     // compare the number of digits and also try to find an exit case
     if (length(A->magnitude) > length(B->magnitude)) {
-      return 1;
+      returnThis = 1;
     } else if (length(B->magnitude) > length(A->magnitude)) {
-      return -1;
+      returnThis = -1;
     } else {
       // the lists have the same length.. we must compare each digit
       // we need to use the cursors for this. So I will save the state of
@@ -110,9 +111,9 @@ int compare(BigInteger A, BigInteger B) {
         long elementB = get(B->magnitude);
 
         if (elementA < elementB) {
-          return -1;
+          returnThis = -1; break;
         } else if (elementB < elementA) {
-          return 1;
+          returnThis = 1; break;
         } else {
           // do nothing
         }
@@ -121,13 +122,27 @@ int compare(BigInteger A, BigInteger B) {
       }
 
       // weve gone through all digits and did not find any differences
-      return 0;
+
+      // restore cursor of A to its original state
+      if (a_cursor_state != -1) {
+        moveFront(A->magnitude);
+        for (int i = 0; i < a_cursor_state; i++) {
+          moveNext(A->magnitude);
+        }
+      }
+
+      // do the same thing to B
+      if (b_cursor_state != -1) {
+        moveFront(B->magnitude);
+        for (int i = 0; i < b_cursor_state; i++) {
+          moveNext(B->magnitude);
+        }
+      }
+
+      return returnThis;
     }
-
   }
-
-
-  return 0;
+  return 0; // dummy return that is never actually reached
 }
 
 // equals()
@@ -308,7 +323,7 @@ BigInteger copy(BigInteger N) {
   A->sign = N->sign;
 
   // copy over the list of N into a new list representing the magnitude of A.
-  A->magnitude = copy(N->magnitude);
+  A->magnitude = copyList(N->magnitude);
 
   // return the deep copy
   // we have allocated HEAP data for a new BigInteger, and also for a new List.
