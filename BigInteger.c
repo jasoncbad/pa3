@@ -306,7 +306,7 @@ BigInteger stringToBigInteger(char* s) {
 
   } // end of for loop
 
-  printf("\tLIST CREATED: "); printList(stdout, A->magnitude);
+  printf("\tLIST CREATED: "); //printList(stdout, A->magnitude);
 
   printf("\tstringToBigInteger() ended...\n");
   return A;
@@ -383,10 +383,10 @@ BigInteger prod(BigInteger A, BigInteger B) {
 // Prints a base 10 string representation of N to filestream out.
 void printBigInteger(FILE* out, BigInteger N) {
   // check for the 0 state
-  if (N->sign == 0) {
+  if (sign(N) == 0) {
     fprintf(out, "%d", 0);
     return;
-  } else if (N->sign == -1) {
+  } else if (sign(N) == -1) {
     fprintf(out, "-");
   }
 
