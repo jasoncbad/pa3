@@ -335,6 +335,69 @@ BigInteger copy(BigInteger N) {
 // current state: S = A + B.
 void add(BigInteger S, BigInteger A, BigInteger B) {
 
+  // S already exists and therefore there is no need to allocate HEAP memory
+  // for it. We should probably reset all of its properties first.
+  makeZero(S);
+
+  // we need to save the state of the cursors in A and B because we want to
+  // restore this state after the operation.
+  int a_cursor_state = index(A->magnitude);
+  int b_cursor_state = index(B->magnitude);
+
+  // move the cursors of each list to the back and prepare to iterate forward
+  // in a while loop.
+  moveBack(A->magnitude); moveBack(B->magnitude);
+
+  // create a flag called carry which will let us know if a carry is needed.
+  int carry = 0;
+
+  // sick of using '->'...
+  List AList = A->magnitude;
+  List BList = B->magnitude;
+  List SList = S->magnitude;
+
+  // while both cursors are defined..
+  while ((index(AList) != -1) && (index(BList) != -1)) {
+
+      // add the two list elements and insert them into the
+      // new entry that is to be prepended to the list in S.
+      prepend(SList, get(AList) + get(BList));
+
+      // move the cursor in S to the front because that is where we are operating
+      moveFront(SList);
+
+      // if theres a carry.. account for it
+      if (carry == 1) {
+        set(SList, get(SList) + 1);
+        carry = 0;
+      }
+
+      if (get(SList) >= BASE) {
+        carry = 1;
+      }
+
+      movePrev(AList);
+      movePrev(BList);
+  }
+
+  // A list still has stuff in it!
+  if (index(AList) != -1)) {
+    // prepend the rest of A list
+    while (index(AList) != -1) {
+
+      (get(SList)
+      prepend(SList, get(AList));
+    }
+  }
+
+  // B list still has stuff in it!
+  if (index(BList) != -1) {
+
+  }
+
+
+
+
   return;
 }
 
