@@ -46,6 +46,8 @@ int main(int argc, char* argv[]) {
 
   // free memory associated with the big integer
   freeBigInteger(&A);
+  freeBigInteger(&B);
+  freeBigInteger(&C);
 
   return 0;
 }

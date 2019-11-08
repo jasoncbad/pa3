@@ -414,7 +414,10 @@ BigInteger sum(BigInteger A, BigInteger B) {
 
   // what if we still have a carry?
   // prepend a new entry
-  prepend(SList, 1);
+  if (carry == 1) {
+    prepend(SList, 1);
+    carry = 0;
+  }
 
   // Normalize!
   normalize(S);
