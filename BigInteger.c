@@ -413,10 +413,10 @@ BigInteger sum(BigInteger A, BigInteger B) {
     // prepend the rest of B list
     while (index(BList) != -1) {
       if (carry == 1) {
-        prepend(SList, get(AList) + 1);
+        prepend(SList, get(BList) + 1);
         carry = 0;
       } else {
-        prepend(SList, get(AList));
+        prepend(SList, get(BList));
       }
       moveBack(BList);
     }
