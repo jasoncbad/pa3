@@ -16,7 +16,7 @@
 int main(int argc, char* argv[]) {
 
   // create a big integer list
-  BigInteger A, B,C;
+  BigInteger A, B, C;
 
   // string to test on
   char myString9[] = "11112278";
