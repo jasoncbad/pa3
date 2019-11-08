@@ -360,6 +360,9 @@ BigInteger sum(BigInteger A, BigInteger B) {
   List BList = B->magnitude;
   List SList = S->magnitude;
 
+  printf("\t\tCursor A before while loop: %d", index(AList) );
+  printf("\t\tCursor B before while loop: %d", index(BList) );
+
   // while both cursors are defined..
   while ((index(AList) != -1) && (index(BList) != -1)) {
 

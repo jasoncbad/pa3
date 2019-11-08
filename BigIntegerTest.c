@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
   C = sum(A, B);
   printBigInteger(stdout, C);
 
-  printBigInteger(stdout, A);
+  //printBigInteger(stdout, A);
 
 
   // test makeZero
