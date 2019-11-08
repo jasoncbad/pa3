@@ -504,5 +504,5 @@ void normalize(BigInteger N) {
       set(M, get(M) - BASE);
     }
     moveNext(M);
-  }s
+  }
 }
