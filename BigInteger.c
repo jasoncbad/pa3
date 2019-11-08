@@ -385,7 +385,7 @@ BigInteger sum(BigInteger A, BigInteger B) {
   }
 
   // A list still has stuff in it!
-  if (index(AList) != -1)) {
+  if (index(AList) != -1) {
     // prepend the rest of A list
     while (index(AList) != -1) {
       if (carry == 1) {
@@ -489,7 +489,7 @@ void printBigInteger(FILE* out, BigInteger N) {
 
   return;
 }
-s
+
 // normalize()
 // takes a bigInteger and normalizes it according to the current base.
 void normalize(BigInteger N) {
