@@ -390,6 +390,8 @@ BigInteger sum(BigInteger A, BigInteger B) {
       movePrev(BList);
   }
 
+  printList(stdout, SList);
+
   // A list still has stuff in it!
   if (index(AList) != -1) {
     // prepend the rest of A list
@@ -403,6 +405,8 @@ BigInteger sum(BigInteger A, BigInteger B) {
       moveBack(AList);
     }
   }
+
+  printList(stdout, SList);
 
   // B list still has stuff in it!
   if (index(BList) != -1) {
@@ -418,6 +422,8 @@ BigInteger sum(BigInteger A, BigInteger B) {
     }
   }
 
+  printList(stdout, SList);
+
   // what if we still have a carry?
   // prepend a new entry
   if (carry == 1) {
@@ -425,8 +431,12 @@ BigInteger sum(BigInteger A, BigInteger B) {
     carry = 0;
   }
 
+  printList(stdout, SList);
+
   // Normalize!
   normalize(S);
+
+  printList(stdout, SList);
 
   // RESTORE CURSOR STATES!
   // restore cursor of A to its original state
@@ -437,6 +447,8 @@ BigInteger sum(BigInteger A, BigInteger B) {
     }
   }
 
+
+
   // do the same thing to B
   if (b_cursor_state != -1) {
     moveFront(B->magnitude);
@@ -444,6 +456,8 @@ BigInteger sum(BigInteger A, BigInteger B) {
       moveNext(B->magnitude);
     }
   }
+
+  printList(stdout, SList);
 
   // we arent returning S.. so
   return S;
