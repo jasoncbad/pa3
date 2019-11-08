@@ -19,8 +19,8 @@ int main(int argc, char* argv[]) {
   BigInteger A, B, C;
 
   // string to test on
-  char myString9[] = "11112278";
-  char myString8[] = "9830";
+  char myString9[] = "9830";
+  char myString8[] = "11112278";
 
   // create the big integer
   A = stringToBigInteger(myString9);

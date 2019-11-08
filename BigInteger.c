@@ -459,7 +459,6 @@ BigInteger sum(BigInteger A, BigInteger B) {
 
   printList(stdout, SList);
 
-  // we arent returning S.. so
   return S;
 }
 
