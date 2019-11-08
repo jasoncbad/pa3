@@ -34,13 +34,14 @@ int main(int argc, char* argv[]) {
   // testing sum
   printf("\nTESTING SUM: A + B\n");
   C = sum(A, B);
+  printf("\n");
   printBigInteger(stdout, C);
 
   //printBigInteger(stdout, A);
 
 
   // test makeZero
-  printf("TESTING makeZero(): \n");
+  printf("\nTESTING makeZero(): \n");
   makeZero(A);  // test makeZero
   printBigInteger(stdout, A);
 

@@ -366,6 +366,9 @@ BigInteger sum(BigInteger A, BigInteger B) {
   // while both cursors are defined..
   while ((index(AList) != -1) && (index(BList) != -1)) {
 
+      printf("\t\tSList: ");
+      printList(stdout, SList);
+
       // add the two list elements and insert them into the
       // new entry that is to be prepended to the list in S.
       prepend(SList, get(AList) + get(BList));
