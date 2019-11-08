@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
   // testing sum
   printf("\nTESTING SUM: A + B\n");
   C = sum(A, B);
-  printBigInteger(C);
+  printBigInteger(stdout, C);
 
   printBigInteger(stdout, A);
 
