@@ -402,7 +402,7 @@ BigInteger sum(BigInteger A, BigInteger B) {
       } else {
         prepend(SList, get(AList));
       }
-      moveBack(AList);
+      movePrev(AList);
     }
   }
 
@@ -418,7 +418,7 @@ BigInteger sum(BigInteger A, BigInteger B) {
       } else {
         prepend(SList, get(BList));
       }
-      moveBack(BList);
+      movePrev(BList);
     }
   }
 
