@@ -16,10 +16,10 @@
 // define statements of base and power
 // these macros will satisfy BASE = 10^POWER
 // --------------------------------------------
-#define BASE 1000000000
+#define BASE 100
 
 // power must be 0 <= POWER <= 9
-#define POWER 9
+#define POWER 2
 
 // definition of a BigInteger object
 typedef struct BigIntegerObj {
@@ -335,9 +335,13 @@ BigInteger copy(BigInteger N) {
 // current state: S = A + B.
 void add(BigInteger S, BigInteger A, BigInteger B) {
 
-  // S already exists and therefore there is no need to allocate HEAP memory
-  // for it. We should probably reset all of its properties first.
-  makeZero(S);
+}
+
+// sum()
+// Returns a reference to a new BigInteger object representing A+B.
+BigInteger sum(BigInteger A, BigInteger B) {
+  // We must create S to return.
+  BigInteger S = newBigInteger();
 
   // we need to save the state of the cursors in A and B because we want to
   // restore this state after the operation.
@@ -384,28 +388,56 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
   if (index(AList) != -1)) {
     // prepend the rest of A list
     while (index(AList) != -1) {
-
-      (get(SList)
-      prepend(SList, get(AList));
+      if (carry == 1) {
+        prepend(SList, get(AList) + 1);
+        carry = 0;
+      } else {
+        prepend(SList, get(AList));
+      }
+      moveBack(AList);
     }
   }
 
   // B list still has stuff in it!
   if (index(BList) != -1) {
-
+    // prepend the rest of B list
+    while (index(BList) != -1) {
+      if (carry == 1) {
+        prepend(SList, get(AList) + 1);
+        carry = 0;
+      } else {
+        prepend(SList, get(AList));
+      }
+      moveBack(BList);
+    }
   }
 
+  // what if we still have a carry?
+  // prepend a new entry
+  prepend(SList, 1);
 
+  // Normalize!
+  normalize(S);
 
+  // RESTORE CURSOR STATES!
+  // restore cursor of A to its original state
+  if (a_cursor_state != -1) {
+    moveFront(A->magnitude);
+    for (int i = 0; i < a_cursor_state; i++) {
+      moveNext(A->magnitude);
+    }
+  }
 
-  return;
-}
+  // do the same thing to B
+  if (b_cursor_state != -1) {
+    moveFront(B->magnitude);
+    for (int i = 0; i < b_cursor_state; i++) {
+      moveNext(B->magnitude);
+    }
+  }
 
-// sum()
-// Returns a reference to a new BigInteger object representing A+B.
-BigInteger sum(BigInteger A, BigInteger B) {
-
-  return NULL;
+  // we arent returning S.. so
+  return S;
 }
 
 // subtract()
@@ -456,4 +488,21 @@ void printBigInteger(FILE* out, BigInteger N) {
   printList(out, N->magnitude);
 
   return;
+}
+s
+// normalize()
+// takes a bigInteger and normalizes it according to the current base.
+void normalize(BigInteger N) {
+  // defined a value to represent the list.
+  List M = N->magnitude;
+
+  // we need to go through the entire list and subtract the base if necessary.
+  moveFront(M);
+
+  while (index(M) != -1) {
+    if (get(M) >= BASE) {
+      set(M, get(M) - BASE);
+    }
+    moveNext(M);
+  }s
 }

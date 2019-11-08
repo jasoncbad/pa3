@@ -33,3 +33,4 @@ BigInteger prod(BigInteger A, BigInteger B);
 
 // other operations
 void printBigInteger(FILE* out, BigInteger N);
+void normalize(BigInteger N);
