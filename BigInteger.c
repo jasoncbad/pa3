@@ -362,12 +362,12 @@ BigInteger sum(BigInteger A, BigInteger B) {
   } else if (A->sign == -1 && B->sign == 1) {
     // not applicable.. we need B - A
     // so call B - A!!
-    S = difference(B, A);
+    S = diff(B, A);
     return S; // and return the result.
   } else if (A->sign == 1 && B->sign == -1) {
     // not applicable.. we need A - B
     // so call A - B!
-    S = difference(A, B);
+    S = diff(A, B);
     return S;
   }
 
