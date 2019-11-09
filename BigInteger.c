@@ -358,6 +358,7 @@ BigInteger sum(BigInteger A, BigInteger B) {
   // we need to determine the sign of the result
   if (A->sign == -1 && B->sign == -1) {
     // apply the algorithm to the lists normally and set sign of S to -.
+    S = newBigInteger();
     S->sign = -1;
   } else if (A->sign == -1 && B->sign == 1) {
     // not applicable.. we need B - A
@@ -369,7 +370,7 @@ BigInteger sum(BigInteger A, BigInteger B) {
     // so call A - B!
     S = diff(A, B);
     return S;
-  }
+  } else {
 
   // we dont care about both being positive because thats why this method exists
   // in the first place.
@@ -377,6 +378,8 @@ BigInteger sum(BigInteger A, BigInteger B) {
   // only allocate heap memory if we need to create it in SUM.. becayse in the
   // previous lines it will be created in difference.
   S = newBigInteger();
+
+  }
 
   // we need to save the state of the cursors in A and B because we want to
   // restore this state after the operation.
