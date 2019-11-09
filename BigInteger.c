@@ -16,10 +16,10 @@
 // define statements of base and power
 // these macros will satisfy BASE = 10^POWER
 // --------------------------------------------
-#define BASE 100
+#define BASE 1000000000
 
 // power must be 0 <= POWER <= 9
-#define POWER 2
+#define POWER 9
 
 // definition of a BigInteger object
 typedef struct BigIntegerObj {
@@ -334,14 +334,49 @@ BigInteger copy(BigInteger N) {
 // Places the sum of A and B in the existing BigInteger S, overwriting it's
 // current state: S = A + B.
 void add(BigInteger S, BigInteger A, BigInteger B) {
+  // CASE: S = A + B
+  // we can perform the normal algorithm since none of the mechanisms will
+  // collide
 
+  // CASE: S = S + A;
+  // one of the operands is S, so building solution S will require performing
+  // the algorithm by adding values of A to S.
+  // CASE: S = A + S;
+  // same case as above.. we can fuse these two cases together
+
+
+  // CASE S = S + S = 2S
+  // this case requires multiplying by 2.
 }
 
 // sum()
 // Returns a reference to a new BigInteger object representing A+B.
 BigInteger sum(BigInteger A, BigInteger B) {
   // We must create S to return.
-  BigInteger S = newBigInteger();
+  BigInteger S;
+
+  // we need to determine the sign of the result
+  if (A->sign == -1 && B->sign == -1) {
+    // apply the algorithm to the lists normally and set sign of S to -.
+    S->sign = -1;
+  } else if (A->sign == -1 && B->sign == 1) {
+    // not applicable.. we need B - A
+    // so call B - A!!
+    S = difference(B, A);
+    return S; // and return the result.
+  } else if (A->sign == 1 && B->sign == -1) {
+    // not applicable.. we need A - B
+    // so call A - B!
+    S = difference(A, B);
+    return S;
+  }
+
+  // we dont care about both being positive because thats why this method exists
+  // in the first place.
+
+  // only allocate heap memory if we need to create it in SUM.. becayse in the
+  // previous lines it will be created in difference.
+  S = newBigInteger();
 
   // we need to save the state of the cursors in A and B because we want to
   // restore this state after the operation.
