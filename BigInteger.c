@@ -765,8 +765,16 @@ void subtract(BigInteger D, BigInteger A, BigInteger B) {
 // Returns a reference to a new BigInteger object representing A - B.
 BigInteger diff(BigInteger A, BigInteger B) {
 
+
   // create the new BigInt
    BigInteger S = newBigInteger();
+
+   if (compare(A, B) < 0) {
+     BigInteger Temp = A;
+     A = B;
+     B = Temp;
+     S->sign = -1;
+   }
 
   // the sign of the result will now be handled in normalize because its \
   // way too complicated now
