@@ -774,6 +774,8 @@ BigInteger diff(BigInteger A, BigInteger B) {
      A = B;
      B = Temp;
      S->sign = -1;
+   } else {
+     S->sign = 1;
    }
 
   // the sign of the result will now be handled in normalize because its \
