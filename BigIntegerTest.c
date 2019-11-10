@@ -8,7 +8,7 @@
 
 -----------------------------------
 */
-#include <stdio.h>
+#include <stdio.h>j
 #include <stdlib.h>
 #include "BigInteger.h"
 
@@ -38,6 +38,13 @@ int main(int argc, char* argv[]) {
   printBigInteger(stdout, C);
 
   //printBigInteger(stdout, A);
+
+  // testing add
+  printf("\nTESTING ADD: C = A + B");
+
+  add(C, A, B);
+  printf("\n");
+  printBigInteger(stdout, C);
 
 
   // test makeZero

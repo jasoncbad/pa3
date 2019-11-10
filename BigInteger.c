@@ -463,9 +463,26 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
     if (S == A && S != B) K = B;
     else if S == B && S != A) K = A;
 
+    // if both are negative
+    if ((K->sign == -1) && (S->sign == -1)) {
+      // follow the normal algorithm. Ensure result S is negative.
+      S->sign = -1;
+    } else if (K->sign == -1 && S->sign == 1) {
+      // we must perform S - K
+      subtract(S, S, K);
+      return;
+    } else if (K->sign == 1 && S->sign == -1) {
+      // we must perform K - S
+      subtract(S, K, S);
+      return;
+    }
+
+    // else perform the addition because both are positive
+
     List KList = K->magnitude;
     List SList = S->magnitude;
 
+    int k_cursor_state = index(KList);
     int k_cursor_state = index(KList);
 
     // use K from now on.. now just add values of K to S, following the carry
@@ -504,7 +521,6 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
         set(SList, get(SList) + 1);
         carry = 0;
       }
-
     } else if (index(SList) == -1 && index(KList) != -1) {
       // if S went undefined.. then we need to prepend the remaining entries of K
       // to S.. all while considering the carry
@@ -512,35 +528,71 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
       while ( index(KList) != -1) {
         // prepend directly
         prepend(SList, get(KList));
-
         // account for carry
         if (carry == 1) {
           set(SList, get(SList) + 1);
           carry = 0;
         }
-
         if (get(SList) >= BASE) {
           carry = 1;
         }
-
         movePrev(KList);
-
       }
-
-
-
     }
 
     // both cursors went undefined at the same time.
+    normalize(S);
 
+    // restore cursor state
+    if (s_cursor_state != -1) {
+      moveFront(S->magnitude);
+      for (int i = 0; i < s_cursor_state; i++) {
+        moveNext(S->magnitude);
+      }
+    }
+    if (k_cursor_state != -1) {
+      moveFront(K->magnitude);
+      for (int i = 0; i < k_cursor_state; i++) {
+        moveNext(K->magnitude);
+      }
+    }
 
-
+    return;
   }
 
   // CASE S = S + S = 2S
   // this case requires multiplying by 2.
   else if (S == A && S == B) {
+    if (S->sign == -1) {
+      S->sign = 1; // negative times negative is positive
+    }
 
+    List SList = S->magnitude;
+    carry = 0;
+    moveBack(SList);
+    while (index(SList) != -1) {
+
+      // perform the operation
+      set(SList,  2 * get(SList));
+
+      // account for carry
+      if (carry == 1) {
+        set(SList, get(SList) + 1);
+        carry = 0;
+      }
+      if (get(SList) >= BASE) {
+        carry = 1;
+      }
+      movePrev(SList);
+    }
+
+    // we are all done. Check for the carry one last time
+    if (carry == 1) {
+      prepend(SList, 1);
+      carry = 0;
+    }
+
+    return;
 
   } else return;
 }
