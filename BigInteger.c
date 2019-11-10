@@ -882,7 +882,7 @@ void normalize(BigInteger N) {
     N->sign = -1;
     // flip everything
     while(index(M) != -1) {
-      set(M, -1 * get(SList));
+      set(M, -1 * get(M));
       moveNext(M);
     }
   } else if (get(M) > 0) {
