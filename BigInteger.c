@@ -617,7 +617,7 @@ BigInteger sum(BigInteger A, BigInteger B) {
   } else if (A->sign == -1 && B->sign == 1) {
     // not applicable.. we need B - A
     // so call B - A!!
-    S = sub(B, A);
+    S = diff(B, A);
     return S; // and return the result.
   } else if (A->sign == 1 && B->sign == -1) {
     // not applicable.. we need A - B
@@ -784,7 +784,7 @@ BigInteger diff(BigInteger A, BigInteger B) {
 
     // straight computation
     prepend(SList, (sign(A) * get(AList)) - (sign(B) * get(BList)));
-    moveFront(S);
+    moveFront(SList);
 
     if (carry == 1) {
       set(SList, get(SList) - 1);
@@ -800,7 +800,7 @@ BigInteger diff(BigInteger A, BigInteger B) {
   // A list extras
   if (index(AList) != -1) {
     // prepend the rest of A list
-    if (carry = 1) {
+    if (carry == 1) {
       prepend(SList, get(AList) - 1);
       carry = 0;
     } else {
@@ -812,8 +812,8 @@ BigInteger diff(BigInteger A, BigInteger B) {
   // B list extras (SPECIAL!.. 0 - B);
   if (index(BList) != -1) {
      while (index(BList) != -1) {
-       if (carry = 1) {
-         prepend(SList, -1 * (get(BList) - 1);
+       if (carry == 1) {
+         prepend(SList, -1 * (get(BList) - 1));
          carry = 0;
        } else {
          prepend(SList, -1 * get(AList));
@@ -823,7 +823,7 @@ BigInteger diff(BigInteger A, BigInteger B) {
   }
 
   // still have a carry?
-  if (carry = 1) {
+  if (carry == 1) {
     prepend(SList, -1);
     carry = 0;
   }
@@ -882,7 +882,7 @@ void normalize(BigInteger N) {
     N->sign = -1;
     // flip everything
     while(index(M) != -1) {
-      set(SList, -1 * get(SList));
+      set(M, -1 * get(SList));
       moveNext(M);
     }
   } else if (get(M) > 0) {
