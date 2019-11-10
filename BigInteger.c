@@ -826,7 +826,7 @@ BigInteger diff(BigInteger A, BigInteger B) {
   if (carry == 1) {
     // prepend(SList, -1); // PREVIOUS METHOD
     moveFront(SList);
-    set(SList, get(SList) - 1);
+    set(SList, get(SList) + 1);
     carry = 0;
   }
 
