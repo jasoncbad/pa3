@@ -824,7 +824,9 @@ BigInteger diff(BigInteger A, BigInteger B) {
 
   // still have a carry?
   if (carry == 1) {
-    prepend(SList, -1);
+    // prepend(SList, -1); // PREVIOUS METHOD
+    moveFront(SList);
+    set(SList, get(SList) - 1);
     carry = 0;
   }
 
