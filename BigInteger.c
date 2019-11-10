@@ -353,6 +353,8 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
       // we must perform A - B
       subtract(S, A, B);
       return;
+    } else {
+      S->sign = 1;
     }
 
     // we need to save the state of the cursors in A and B because we want to
