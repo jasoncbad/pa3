@@ -794,16 +794,13 @@ BigInteger diff(BigInteger A, BigInteger B) {
     prepend(SList, (sign(A) * get(AList)) - (sign(B) * get(BList)));
     moveFront(SList);
 
-    // add the carry if it exists
+    // subtract the carry if it exists
     if (carry != 0) {
-      set(SList, get(SList) + carry); // if we had a negative carry.. accounts for it
+      set(SList, get(SList)-1); // if we had a negative carry.. accounts for it
     }
 
     if (get(SList) < 0) {
       // set the carry to -1 for the next cycle
-      carry = -1;
-    } else if (get(SList) >= BASE) {
-      // set the carry to +1 for the next cycle
       carry = 1;
     }
 
@@ -827,12 +824,12 @@ BigInteger diff(BigInteger A, BigInteger B) {
   if (index(BList) != -1) {
      while (index(BList) != -1) {
        if (carry == 1) {
-         prepend(SList, -1 * (get(BList) - 1));
+         prepend(SList, (-1 * (get(BList)) - 1));
          carry = 0;
        } else {
-         prepend(SList, -1 * get(AList));
+         prepend(SList, -1 * get(BList));
        }
-       movePrev(AList);
+       movePrev(BList);
      }
   }
 
