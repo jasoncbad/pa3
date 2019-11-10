@@ -357,14 +357,14 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
     List BList = B->magnitude;
     List SList = S->magnitude;
 
-    printf("\t\tCursor A before while loop: %d", index(AList) );
-    printf("\t\tCursor B before while loop: %d", index(BList) );
+    printf("\n\t\tCursor A before while loop: %d", index(AList) );
+    printf("\n\t\tCursor B before while loop: %d\n", index(BList) );
 
     // while both cursors are defined..
     while ((index(AList) != -1) && (index(BList) != -1)) {
 
-        //printf("\t\tSList: ");
-        //printList(stdout, SList);
+        printf("\n\t\tSList: ");
+        printList(stdout, SList);
 
         // add the two list elements and insert them into the
         // new entry that is to be prepended to the list in S.
