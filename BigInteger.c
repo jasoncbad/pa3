@@ -793,7 +793,7 @@ BigInteger diff(BigInteger A, BigInteger B) {
 
     if (get(SList) < 0) {
       // set the carry to -1 for the next cycle
-      carry = -1
+      carry = -1;
     } else if (get(SList) >= BASE) {
       // set the carry to +1 for the next cycle
       carry = 1;
