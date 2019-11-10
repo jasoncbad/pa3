@@ -51,6 +51,7 @@ int main(int argc, char* argv[]) {
   printf("\nTESTING makeZero(): \n");
   makeZero(A);  // test makeZero
   printBigInteger(stdout, A);
+  printf("\n");
 
   // free memory associated with the big integer
   freeBigInteger(&A);

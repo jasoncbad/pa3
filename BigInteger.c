@@ -341,6 +341,20 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
   if (S != A && S != B) {
     makeZero(S); // we will be overwriting S...
 
+    // if both are negative
+    if ((A->sign == -1) && (B->sign == -1)) {
+      // follow the normal algorithm. Ensure result S is negative.
+      S->sign = -1;
+    } else if (A->sign == -1 && B->sign == 1) {
+      // we must perform B - A
+      subtract(S, B, A);
+      return;
+    } else if (A->sign == 1 && B->sign == -1) {
+      // we must perform A - B
+      subtract(S, A, B);
+      return;
+    }
+
     // we need to save the state of the cursors in A and B because we want to
     // restore this state after the operation.
     int a_cursor_state = index(A->magnitude);
