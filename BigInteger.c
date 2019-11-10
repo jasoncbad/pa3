@@ -337,6 +337,7 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
   // CASE: S = A + B
   // we can perform the normal algorithm since none of the mechanisms will
   // collide
+  int carry = 0;
   if (S != A && S != B) {
     makeZero(S); // we will be overwriting S...
 
@@ -350,7 +351,6 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
     moveBack(A->magnitude); moveBack(B->magnitude);
 
     // create a flag called carry which will let us know if a carry is needed.
-    int carry = 0;
 
     // sick of using '->'...
     List AList = A->magnitude;
@@ -461,7 +461,7 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
     // determine BigInteger K which is not equal to S...
     BigInteger K;
     if (S == A && S != B) K = B;
-    else if S == B && S != A) K = A;
+    else if (S == B && S != A) K = A;
 
     // if both are negative
     if ((K->sign == -1) && (S->sign == -1)) {
@@ -483,7 +483,7 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
     List SList = S->magnitude;
 
     int k_cursor_state = index(KList);
-    int k_cursor_state = index(KList);
+    int s_cursor_state = index(SList);
 
     // use K from now on.. now just add values of K to S, following the carry
     // convention, and then normalize.. restore cursor K.
