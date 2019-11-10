@@ -775,8 +775,6 @@ BigInteger diff(BigInteger A, BigInteger B) {
      A = B;
      B = Temp;
      S->sign = -1;
-   } else {
-     S->sign = 1;
    } else if (comparison > 0) {
      if (sign(B) == -1) {
        free(S);
@@ -784,7 +782,9 @@ BigInteger diff(BigInteger A, BigInteger B) {
        S = sum(A,B);
        negate(B);
        return S;
-     }
+    } else {
+       S->sign = 1;
+    }
    }
 
 
