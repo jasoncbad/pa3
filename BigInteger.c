@@ -797,6 +797,7 @@ BigInteger diff(BigInteger A, BigInteger B) {
     // subtract the carry if it exists
     if (carry != 0) {
       set(SList, get(SList)-1); // if we had a negative carry.. accounts for it
+      carry = 0;
     }
 
     if (get(SList) < 0) {
