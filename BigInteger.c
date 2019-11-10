@@ -904,7 +904,7 @@ void normalize(BigInteger N) {
     }
   } else if (get(M) > 0) {
     // perform the normailzation for a positive answer
-    N->sign = 1;
+    //
   } else {
     // the front value of M equals 0..
     // we need to
