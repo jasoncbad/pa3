@@ -40,11 +40,11 @@ int main(int argc, char* argv[]) {
   //printBigInteger(stdout, A);
 
   // testing add
-  printf("\nTESTING ADD: C = A + B");
+  /*printf("\nTESTING ADD: C = A + B");
 
   add(C, A, B);
   printf("\n");
-  printBigInteger(stdout, C);
+  printBigInteger(stdout, C);*/
 
 
   // test makeZero

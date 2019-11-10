@@ -497,7 +497,6 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
 
     List KList = K->magnitude;
     List SList = S->magnitude;
-
     int k_cursor_state = index(KList);
     int s_cursor_state = index(SList);
 
@@ -510,24 +509,20 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
     // while K cursor is still active
     int carry = 0;
     while( index(KList) != -1 ) {
-
       // add the element K to S.
       set(SList, get(SList) + get(KList)); // S + K
-
       // account for carry
       if (carry == 1) {
         set(SList, get(SList) + 1);
         carry = 0;
       }
-
       if (get(SList) >= BASE) {
         carry = 1;
       }
-
+      // iterate
       movePrev(SList);
       movePrev(KList);
     }
-
     // if K went undefined.. We don't need to work on S anymore.. but we do
     // need to worry about the carry.
     if (index(KList) == -1 && index(SList) != -1) {
@@ -559,7 +554,7 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
     // both cursors went undefined at the same time.
     normalize(S);
 
-    // restore cursor state
+    // restore cursor states
     if (s_cursor_state != -1) {
       moveFront(S->magnitude);
       for (int i = 0; i < s_cursor_state; i++) {
@@ -572,7 +567,6 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
         moveNext(K->magnitude);
       }
     }
-
     return;
   }
 
@@ -587,7 +581,6 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
     carry = 0;
     moveBack(SList);
     while (index(SList) != -1) {
-
       // perform the operation
       set(SList,  2 * get(SList));
 
@@ -596,9 +589,7 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
         set(SList, get(SList) + 1);
         carry = 0;
       }
-      if (get(SList) >= BASE) {
-        carry = 1;
-      }
+      if (get(SList) >= BASE) carry = 1;
       movePrev(SList);
     }
 
@@ -607,9 +598,8 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
       prepend(SList, 1);
       carry = 0;
     }
-
+    normalize(S); // normalize
     return;
-
   } else return;
 }
 
@@ -627,7 +617,7 @@ BigInteger sum(BigInteger A, BigInteger B) {
   } else if (A->sign == -1 && B->sign == 1) {
     // not applicable.. we need B - A
     // so call B - A!!
-    S = diff(B, A);
+    S = sub(B, A);
     return S; // and return the result.
   } else if (A->sign == 1 && B->sign == -1) {
     // not applicable.. we need A - B
@@ -696,6 +686,7 @@ BigInteger sum(BigInteger A, BigInteger B) {
 
   // A list still has stuff in it!
   if (index(AList) != -1) {
+
     // prepend the rest of A list
     while (index(AList) != -1) {
       if (carry == 1) {
@@ -774,7 +765,71 @@ void subtract(BigInteger D, BigInteger A, BigInteger B) {
 // Returns a reference to a new BigInteger object representing A - B.
 BigInteger diff(BigInteger A, BigInteger B) {
 
-  return NULL;
+  // create the new BigInt
+   BigInteger S = newBigInteger();
+
+  // the sign of the result will now be handled in normalize because its \
+  // way too complicated now
+
+  int a_cursor_state = index(A->magnitude);
+  int b_cursor_state = index(B->magnitude);
+  moveBack(A->magnitude); moveBack(B->magnitude);
+
+  int carry = 0;
+  List AList = A->magnitude;
+  List BList = B->magnitude;
+  List SList = S->magnitude;
+
+  while((index(AList) != -1) && (index(BList) != -1)) {
+
+    // straight computation
+    prepend(SList, (sign(A) * get(AList)) - (sign(B) * get(BList)));
+    moveFront(S);
+
+    if (carry == 1) {
+      set(SList, get(SList) - 1);
+      carry = 0;
+    }
+    if (get(SList) < 0) {
+      carry = 1;
+    }
+    movePrev(AList);
+    movePrev(BList);
+  }
+
+  // A list extras
+  if (index(AList) != -1) {
+    // prepend the rest of A list
+    if (carry = 1) {
+      prepend(SList, get(AList) - 1);
+      carry = 0;
+    } else {
+      prepend(SList, get(AList));
+    }
+    movePrev(AList);
+  }
+
+  // B list extras (SPECIAL!.. 0 - B);
+  if (index(BList) != -1) {
+     while (index(BList) != -1) {
+       if (carry = 1) {
+         prepend(SList, -1 * (get(BList) - 1);
+         carry = 0;
+       } else {
+         prepend(SList, -1 * get(AList));
+       }
+       movePrev(AList);
+     }
+  }
+
+  // still have a carry?
+  if (carry = 1) {
+    prepend(SList, -1);
+    carry = 0;
+  }
+
+  normalize(S);
+  return S;
 }
 
 // multiply()
@@ -821,9 +876,29 @@ void normalize(BigInteger N) {
   // we need to go through the entire list and subtract the base if necessary.
   moveFront(M);
 
+  // if the first entry is negative
+  if (get(M) < 0) {
+    // we know the sign now
+    N->sign = -1;
+    // flip everything
+    while(index(M) != -1) {
+      set(SList, -1 * get(SList));
+      moveNext(M);
+    }
+  } else if (get(M) > 0) {
+    // perform the normailzation for a positive answer
+    N->sign = 1;
+  } else {
+    // the front value of M equals 0..
+    // we need to
+  }
+
+  moveFront(M);
   while (index(M) != -1) {
     if (get(M) >= BASE) {
       set(M, get(M) - BASE);
+    } else if (get(M) < 0) {
+      set(M, get(M) + BASE);
     }
     moveNext(M);
   }
