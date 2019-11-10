@@ -769,14 +769,25 @@ BigInteger diff(BigInteger A, BigInteger B) {
   // create the new BigInt
    BigInteger S = newBigInteger();
 
-   if (compare(A, B) < 0) {
+   int comparison = compare(A,B);
+   if (comparison < 0) {
      BigInteger Temp = A;
      A = B;
      B = Temp;
      S->sign = -1;
    } else {
      S->sign = 1;
+   } else if (comparison > 0) {
+     if (sign(B) == -1) {
+       free(S);
+       negate(B);
+       S = sum(A,B);
+       negate(B);
+       return S;
+     }
    }
+
+
 
   // the sign of the result will now be handled in normalize because its \
   // way too complicated now
