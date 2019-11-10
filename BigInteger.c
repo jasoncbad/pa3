@@ -836,7 +836,6 @@ BigInteger diff(BigInteger A, BigInteger B) {
 // Places the product of A and B in the existing BigInteger P, overwriting
 // its current state: P = A*B
 void multiply(BigInteger P, BigInteger A, BigInteger B) {
-
   return;
 }
 
