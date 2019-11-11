@@ -796,7 +796,11 @@ BigInteger diff(BigInteger A, BigInteger B) {
        negate(B);
        return S;
      }  else if (sign(B) == -1 && sign(A) == -1) {
-
+      free(S);
+      negate(B);
+      S = sum(A,B);
+      negate(B);
+      return S;
      }
    } else {
       S->sign = 1;
