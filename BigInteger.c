@@ -641,7 +641,7 @@ BigInteger sum(BigInteger A, BigInteger B) {
 
       // add the two list elements and insert them into the
       // new entry that is to be prepended to the list in S.
-      prepend(SList, get(AList) + get(BList));
+      prepend(SList, (sign(A) * get(AList)) + (sign(B) * get(BList)) );
 
       movePrev(AList);
       movePrev(BList);
