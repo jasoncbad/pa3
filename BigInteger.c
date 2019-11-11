@@ -862,6 +862,7 @@ void normalize(BigInteger N) {
         carry = (get(NList) / BASE); // will product a negative carry in this case
         set(NList, get(NList) + (BASE * carry));
       } else if (get(NList) >= BASE) {
+        printf("\ncarry applicable!\n");
         carry = (get(NList) / BASE) - 1; // will produce a positive carry
         set(NList, get(NList) - (BASE * carry));
       } else {
