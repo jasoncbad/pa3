@@ -855,6 +855,7 @@ void normalize(BigInteger N) {
       if (carry != 0) {
         printf("\t\tadding %d to %ld..\n", carry, get(NList));
         set(NList, get(NList) + carry);
+        carry = 0;
       }
 
       // if the index is out of bounds.. determine by how much
@@ -862,13 +863,11 @@ void normalize(BigInteger N) {
         // determine how many borrows were needed..
         carry = (get(NList) / BASE) + 1; // will product a negative carry in this case
         set(NList, get(NList) + (BASE * carry));
-        carry = 0;
       } else if (get(NList) >= BASE) {
         printf("\ncarry applicable!\n");
         carry = (get(NList) / BASE); // will produce a positive carry
         printf("\tcarry set to %d!\n", carry);
         set(NList, get(NList) - (BASE * carry));
-        carry = 0;
       } else {
         // digit is within range and no carry is needed..
 
