@@ -777,6 +777,7 @@ BigInteger diff(BigInteger A, BigInteger B) {
      S->sign = -1;
    } else if (comparison > 0) {
      if (sign(B) == -1) {
+       printf("\nB is negative and less than S..")
        free(S);
        negate(B);
        S = sum(A,B);
