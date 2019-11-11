@@ -769,7 +769,8 @@ BigInteger diff(BigInteger A, BigInteger B) {
   // create the new BigInt
    BigInteger S = newBigInteger();
 
-   int comparison = compare(A,B);
+   int comparison = compare(A, B);
+   printf("\ncomparison returns %d for A/B\n", comparison);
    if (comparison < 0) {
      BigInteger Temp = A;
      A = B;
