@@ -861,8 +861,8 @@ void normalize(BigInteger N) {
       // if the index is out of bounds.. determine by how much
       if (get(NList) < 0) {
         // determine how many borrows were needed..
-        carry = (get(NList) / BASE) - 1; // will product a negative carry in this case
-        set(NList, get(NList) + (BASE * carry));
+        carry = (get(NList) / BASE) + 1; // will product a negative carry in this case
+        set(NList, get(NList) + abs(BASE * carry));
       } else if (get(NList) >= BASE) {
         printf("\ncarry applicable!\n");
         carry = (get(NList) / BASE); // will produce a positive carry
