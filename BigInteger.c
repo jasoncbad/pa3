@@ -807,7 +807,7 @@ BigInteger diff(BigInteger A, BigInteger B) {
       S->sign = 1;
    }
 
-
+ 
 
   // the sign of the result will now be handled in normalize because its \
   // way too complicated now
