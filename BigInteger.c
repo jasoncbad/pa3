@@ -780,6 +780,7 @@ BigInteger diff(BigInteger A, BigInteger B) {
        free(S);
        negate(B);
        S = sum(A,B);
+       S->sign = 1;
        negate(B);
        return S;
     } else {
