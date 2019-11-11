@@ -627,6 +627,7 @@ BigInteger sum(BigInteger A, BigInteger B) {
   } else if (A->sign == -1 && B->sign == 1) {
     // not applicable.. we need B - A
     // so call B - A!!
+    printf("\nCALLING B - A..\n");
     S = diff(B, A);
     return S; // and return the result.
   } else if (A->sign == 1 && B->sign == -1) {
