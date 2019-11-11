@@ -443,7 +443,7 @@ void printList(FILE* out, List L) {
   // loop through and print each element to the output file 'Output.txt' in
   // the format specified by pa1.
   while(L->cursor != NULL) {
-    fprintf(out, "%ld", get(L));
+    fprintf(out, "%ld ", get(L));
     moveNext(L);
   }
   printf("\n");
