@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
   BigInteger D;
   D = diff(A, B);
   printf("\n");
-  printBigInteger(stdout, C);
+  printBigInteger(stdout, D);
 
   //printBigInteger(stdout, A);
 
