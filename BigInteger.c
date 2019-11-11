@@ -142,7 +142,7 @@ int compare(BigInteger A, BigInteger B) {
       return returnThis;
     }
   }
-  return 0; // dummy return that is never actually reached
+  return returnThis; // dummy return that is never actually reached
 }
 
 // equals()
