@@ -16,10 +16,10 @@
 // define statements of base and power
 // these macros will satisfy BASE = 10^POWER
 // --------------------------------------------
-#define BASE 1000000000
+#define BASE 1000
 
 // power must be 0 <= POWER <= 9
-#define POWER 9
+#define POWER 3
 
 // definition of a BigInteger object
 typedef struct BigIntegerObj {
@@ -618,45 +618,11 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
 BigInteger sum(BigInteger A, BigInteger B) {
   // We must create S to return.
   BigInteger S;
-
-  // we need to determine the sign of the result
-  if (A->sign == -1 && B->sign == -1) {
-    // apply the algorithm to the lists normally and set sign of S to -.
-    S = newBigInteger();
-    S->sign = -1;
-  } else if (A->sign == -1 && B->sign == 1) {
-    // not applicable.. we need B - A
-    // so call B - A!!
-    printf("\nCALLING B - A..\n");
-    S = diff(B, A);
-    return S; // and return the result.
-  } else if (A->sign == 1 && B->sign == -1) {
-    // not applicable.. we need A - B
-    // so call A - B!
-    S = diff(A, B);
-    return S;
-  } else {
-
-  // we dont care about both being positive because thats why this method exists
-  // in the first place.
-
-  // only allocate heap memory if we need to create it in SUM.. becayse in the
-  // previous lines it will be created in difference.
   S = newBigInteger();
-
-  }
-
-  // we need to save the state of the cursors in A and B because we want to
-  // restore this state after the operation.
-  int a_cursor_state = index(A->magnitude);
-  int b_cursor_state = index(B->magnitude);
 
   // move the cursors of each list to the back and prepare to iterate forward
   // in a while loop.
   moveBack(A->magnitude); moveBack(B->magnitude);
-
-  // create a flag called carry which will let us know if a carry is needed.
-  int carry = 0;
 
   // sick of using '->'...
   List AList = A->magnitude;
@@ -676,19 +642,6 @@ BigInteger sum(BigInteger A, BigInteger B) {
       // new entry that is to be prepended to the list in S.
       prepend(SList, get(AList) + get(BList));
 
-      // move the cursor in S to the front because that is where we are operating
-      moveFront(SList);
-
-      // if theres a carry.. account for it
-      if (carry == 1) {
-        set(SList, get(SList) + 1);
-        carry = 0;
-      }
-
-      if (get(SList) >= BASE) {
-        carry = 1;
-      }
-
       movePrev(AList);
       movePrev(BList);
   }
@@ -697,15 +650,9 @@ BigInteger sum(BigInteger A, BigInteger B) {
 
   // A list still has stuff in it!
   if (index(AList) != -1) {
-
     // prepend the rest of A list
     while (index(AList) != -1) {
-      if (carry == 1) {
-        prepend(SList, get(AList) + 1);
-        carry = 0;
-      } else {
-        prepend(SList, get(AList));
-      }
+      prepend(SList, get(AList));
       movePrev(AList);
     }
   }
@@ -716,23 +663,9 @@ BigInteger sum(BigInteger A, BigInteger B) {
   if (index(BList) != -1) {
     // prepend the rest of B list
     while (index(BList) != -1) {
-      if (carry == 1) {
-        prepend(SList, get(BList) + 1);
-        carry = 0;
-      } else {
-        prepend(SList, get(BList));
-      }
+      prepend(SList, get(BList));
       movePrev(BList);
     }
-  }
-
-  //printList(stdout, SList);
-
-  // what if we still have a carry?
-  // prepend a new entry
-  if (carry == 1) {
-    prepend(SList, 1);
-    carry = 0;
   }
 
   //printList(stdout, SList);
@@ -741,25 +674,6 @@ BigInteger sum(BigInteger A, BigInteger B) {
   normalize(S);
 
   //printList(stdout, SList);
-
-  // RESTORE CURSOR STATES!
-  // restore cursor of A to its original state
-  if (a_cursor_state != -1) {
-    moveFront(A->magnitude);
-    for (int i = 0; i < a_cursor_state; i++) {
-      moveNext(A->magnitude);
-    }
-  }
-
-  // do the same thing to B
-  if (b_cursor_state != -1) {
-    moveFront(B->magnitude);
-    for (int i = 0; i < b_cursor_state; i++) {
-      moveNext(B->magnitude);
-    }
-  }
-
-  printList(stdout, SList);
 
   return S;
 }
@@ -807,7 +721,7 @@ BigInteger diff(BigInteger A, BigInteger B) {
       S->sign = 1;
    }
 
- 
+
 
   // the sign of the result will now be handled in normalize because its \
   // way too complicated now
@@ -918,36 +832,49 @@ void printBigInteger(FILE* out, BigInteger N) {
 // normalize()
 // takes a bigInteger and normalizes it according to the current base.
 void normalize(BigInteger N) {
-  // defined a value to represent the list.
-  List M = N->magnitude;
-
-  // we need to go through the entire list and subtract the base if necessary.
-  moveFront(M);
-
-  // if the first entry is negative
-  if (get(M) < 0) {
-    // we know the sign now
+  // hold the magnitude list.
+  List NList = N->magnitude;
+  // determine the sign
+  if (front(NList) < 0) {
     N->sign = -1;
-    // flip everything
-    while(index(M) != -1) {
-      set(M, -1 * get(M));
-      moveNext(M);
+
+    // we need to flip every value
+    moveFront(NList);
+    while(index(NList) != -1) {
+      set(NList, get(NList) * -1);
+      moveNext(NList);
     }
-  } else if (get(M) > 0) {
-    // perform the normailzation for a positive answer
-    //
-  } else {
-    // the front value of M equals 0..
-    // we need to
+  }
+  // else the sign is positive and its time to start from the back
+  // and move forward determining the amount of carries and borrows needed.
+  moveBack(NList);
+  int carry = 0;
+  while(index(NList) != -1) {
+      // apply a carry
+      if (carry != 0) {
+        set(NList, get(NList) + carry);
+      }
+
+      // if the index is out of bounds.. determine by how much
+      if (get(NList) < 0) {
+        // determine how many borrows were needed..
+        carry = (get(NList) / BASE); // will product a negative carry in this case
+        set(NList, get(NList) + (BASE * carry));
+      } else if (get(NList) >= BASE) {
+        carry = (get(NList) / BASE) - 1; // will produce a positive carry
+        set(NList, get(NList) - (BASE * carry));
+      } else {
+        // digit is within range and no carry is needed..
+
+      }
+
+      movePrev(NList);
   }
 
-  moveFront(M);
-  while (index(M) != -1) {
-    if (get(M) >= BASE) {
-      set(M, get(M) - BASE);
-    } else if (get(M) < 0) {
-      set(M, get(M) + BASE);
-    }
-    moveNext(M);
+  // if a carry still exists.. prepend the amount
+  if (carry > 0) {
+    prepend(NList, carry);
   }
+
+
 }

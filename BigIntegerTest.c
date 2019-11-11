@@ -19,8 +19,8 @@ int main(int argc, char* argv[]) {
   BigInteger A, B, C;
 
   // string to test on
-  char myString9[] = "-11112222333";
-  char myString8[] = "-11212222333";
+  char myString9[] = "+900500900";
+  char myString8[] = "+100300400";
 
   // create the big integer
   A = stringToBigInteger(myString9);
@@ -32,8 +32,8 @@ int main(int argc, char* argv[]) {
   //negate(A);    // test negate
 
   // testing sum
-  printf("\nTESTING DIFF: A - B\n");
-  C = diff(A, B);
+  printf("\nTESTING SUM: A + B\n");
+  C = sum(A, B);
   printf("\n");
   printBigInteger(stdout, C);
 
