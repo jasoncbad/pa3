@@ -853,6 +853,7 @@ void normalize(BigInteger N) {
   while(index(NList) != -1) {
       // apply a carry
       if (carry != 0) {
+        printf("\t\tadding %d to %ld..\n", carry, get(NList));
         set(NList, get(NList) + carry);
       }
 
@@ -864,6 +865,7 @@ void normalize(BigInteger N) {
       } else if (get(NList) >= BASE) {
         printf("\ncarry applicable!\n");
         carry = (get(NList) / BASE) - 1; // will produce a positive carry
+        printf("\tcarry set to %d!\n", carry);
         set(NList, get(NList) - (BASE * carry));
       } else {
         // digit is within range and no carry is needed..
