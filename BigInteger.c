@@ -784,9 +784,9 @@ BigInteger diff(BigInteger A, BigInteger B) {
        S->sign = 1;
        negate(B);
        return S;
-    } else {
-       S->sign = 1;
-    }
+     }
+   } else {
+      S->sign = 1;
    }
 
 
