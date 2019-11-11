@@ -111,9 +111,19 @@ int compare(BigInteger A, BigInteger B) {
         long elementB = get(B->magnitude);
 
         if (elementA < elementB) {
-          returnThis = -1; break;
+          // A < B if both positive.. but A > B if both negative
+          if(sign(A) == 1) {
+            returnThis = -1; break;
+          } else if (sign(A) == -1) {
+            returnThis = 1; break;
+          }
         } else if (elementB < elementA) {
-          returnThis = 1; break;
+          // B < A if both positive.. but B > A if both negative
+          if (sign(A) == 1) {
+            returnThis = 1; break;
+          } else if (sign(A) == -1) {
+            returnThis = -1; break;
+          }
         } else {
           // do nothing
         }
@@ -777,7 +787,7 @@ BigInteger diff(BigInteger A, BigInteger B) {
      B = Temp;
      S->sign = -1;
    } else if (comparison > 0) {
-     if ((sign(B) == -1 && sign(A) == 1) || (sign(B) == -1 && sign(A) == -1)) {
+     if ((sign(B) == -1 && sign(A) == 1)) {
        printf("\nB is negative and less than S..");
        free(S);
        negate(B);
@@ -785,7 +795,9 @@ BigInteger diff(BigInteger A, BigInteger B) {
        S->sign = 1;
        negate(B);
        return S;
-     } 
+     }  else if (sign(B) == -1 && sign(A) == -1) {
+
+     }
    } else {
       S->sign = 1;
    }
