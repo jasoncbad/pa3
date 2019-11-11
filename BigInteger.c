@@ -619,6 +619,7 @@ BigInteger sum(BigInteger A, BigInteger B) {
   // We must create S to return.
   BigInteger S;
   S = newBigInteger();
+  S->sign = +1;
 
   // move the cursors of each list to the back and prepare to iterate forward
   // in a while loop.
