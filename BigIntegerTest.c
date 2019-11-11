@@ -37,6 +37,13 @@ int main(int argc, char* argv[]) {
   printf("\n");
   printBigInteger(stdout, C);
 
+
+  printf("\nTESTING DIFF: A = B\n");
+  BigInteger D;
+  D = diff(A, B);
+  printf("\n");
+  printBigInteger(stdout, C);
+
   //printBigInteger(stdout, A);
 
   // testing add
@@ -57,6 +64,7 @@ int main(int argc, char* argv[]) {
   freeBigInteger(&A);
   freeBigInteger(&B);
   freeBigInteger(&C);
+  freeBigInteger(&D);
 
   return 0;
 }

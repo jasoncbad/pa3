@@ -635,10 +635,6 @@ BigInteger sum(BigInteger A, BigInteger B) {
 
   // while both cursors are defined..
   while ((index(AList) != -1) && (index(BList) != -1)) {
-
-      //printf("\t\tSList: ");
-      //printList(stdout, SList);
-
       // add the two list elements and insert them into the
       // new entry that is to be prepended to the list in S.
       prepend(SList, (sign(A) * get(AList)) + (sign(B) * get(BList)) );
@@ -646,36 +642,23 @@ BigInteger sum(BigInteger A, BigInteger B) {
       movePrev(AList);
       movePrev(BList);
   }
-
-  //printList(stdout, SList);
-
   // A list still has stuff in it!
   if (index(AList) != -1) {
     // prepend the rest of A list
     while (index(AList) != -1) {
-      prepend(SList, get(AList));
+      prepend(SList, sign(A) * get(AList));
       movePrev(AList);
     }
   }
-
-  //printList(stdout, SList);
-
   // B list still has stuff in it!
   if (index(BList) != -1) {
     // prepend the rest of B list
     while (index(BList) != -1) {
-      prepend(SList, get(BList));
+      prepend(SList, sign(B) * get(BList));
       movePrev(BList);
     }
   }
-
-  //printList(stdout, SList);
-
-  // Normalize!
   normalize(S);
-
-  //printList(stdout, SList);
-
   return S;
 }
 
@@ -690,48 +673,12 @@ void subtract(BigInteger D, BigInteger A, BigInteger B) {
 // diff()
 // Returns a reference to a new BigInteger object representing A - B.
 BigInteger diff(BigInteger A, BigInteger B) {
-
-
   // create the new BigInt
-   BigInteger S = newBigInteger();
+  BigInteger S = newBigInteger();
+  S->sign = +1;
 
-   int comparison = compare(A, B);
-   printf("\ncomparison returns %d for A/B\n", comparison);
-   if (comparison < 0) {
-     BigInteger Temp = A;
-     A = B;
-     B = Temp;
-     S->sign = -1;
-   } else if (comparison > 0) {
-     if ((sign(B) == -1 && sign(A) == 1)) {
-       printf("\nB is negative and less than S..");
-       free(S);
-       negate(B);
-       S = sum(A,B);
-       S->sign = 1;
-       negate(B);
-       return S;
-     }  else if (sign(B) == -1 && sign(A) == -1) {
-      free(S);
-      negate(B);
-      S = sum(A,B);
-      negate(B);
-      return S;
-     }
-   } else {
-      S->sign = 1;
-   }
-
-
-
-  // the sign of the result will now be handled in normalize because its \
-  // way too complicated now
-
-  int a_cursor_state = index(A->magnitude);
-  int b_cursor_state = index(B->magnitude);
   moveBack(A->magnitude); moveBack(B->magnitude);
 
-  int carry = 0;
   List AList = A->magnitude;
   List BList = B->magnitude;
   List SList = S->magnitude;
@@ -742,55 +689,26 @@ BigInteger diff(BigInteger A, BigInteger B) {
     prepend(SList, (sign(A) * get(AList)) - (sign(B) * get(BList)));
     moveFront(SList);
 
-    // subtract the carry if it exists
-    if (carry != 0) {
-      set(SList, get(SList)-1); // if we had a negative carry.. accounts for it
-      carry = 0;
-    }
-
-    if (get(SList) < 0) {
-      // set the carry to -1 for the next cycle
-      carry = 1;
-    }
-
     movePrev(AList);
     movePrev(BList);
   }
 
   // A list extras
   if (index(AList) != -1) {
-    // prepend the rest of A list
-    if (carry == 1) {
-      prepend(SList, get(AList) - 1);
-      carry = 0;
-    } else {
-      prepend(SList, get(AList));
+    while (index(AList) != -1) {
+      prepend(SList, sign(A) * get(AList));
+      movePrev(AList);
     }
-    movePrev(AList);
   }
 
   // B list extras (SPECIAL!.. 0 - B);
   if (index(BList) != -1) {
      while (index(BList) != -1) {
-       if (carry == 1) {
-         prepend(SList, (-1 * (get(BList)) - 1));
-         carry = 0;
-       } else {
-         prepend(SList, -1 * get(BList));
-       }
+       prepend(SList, -1 * get(BList));
        movePrev(BList);
      }
   }
 
-  // still have a carry?
-  if (carry == 1) {
-    prepend(SList, 1); // PREVIOUS METHOD
-    //moveFront(SList);
-    //set(SList, get(SList) + 1);
-    carry = 0;
-  } else if (carry == -1) {
-    prepend(SList, -1);
-  }
 
   normalize(S);
   return S;
