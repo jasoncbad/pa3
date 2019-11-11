@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
 
   // string to test on
   char myString9[] = "-11112222333";
-  char myString8[] = "-11112222333";
+  char myString8[] = "-11212222333";
 
   // create the big integer
   A = stringToBigInteger(myString9);
