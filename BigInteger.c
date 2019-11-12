@@ -344,273 +344,20 @@ BigInteger copy(BigInteger N) {
 // Places the sum of A and B in the existing BigInteger S, overwriting it's
 // current state: S = A + B.
 void add(BigInteger S, BigInteger A, BigInteger B) {
-  // CASE: S = A + B
-  // we can perform the normal algorithm since none of the mechanisms will
-  // collide
-  int carry = 0;
-  if (S != A && S != B) {
-    makeZero(S); // we will be overwriting S...
+  BigInteger T = sum(A, B);
 
-    // if both are negative
-    if ((A->sign == -1) && (B->sign == -1)) {
-      // follow the normal algorithm. Ensure result S is negative.
-      S->sign = -1;
-    } else if (A->sign == -1 && B->sign == 1) {
-      // we must perform B - A
-      subtract(S, B, A);
-      return;
-    } else if (A->sign == 1 && B->sign == -1) {
-      // we must perform A - B
-      subtract(S, A, B);
-      return;
-    } else {
-      S->sign = 1;
-    }
+  // we've now obtained T.. match magnitudes and swap list pointers
+  S->sign = sign(T);
 
-    // we need to save the state of the cursors in A and B because we want to
-    // restore this state after the operation.
-    int a_cursor_state = index(A->magnitude);
-    int b_cursor_state = index(B->magnitude);
+  List delete_this = S->magnitude; // save for deletion
+  S->magnitude = T->magnitude; // point to T's magnitude instead
 
-    // move the cursors of each list to the back and prepare to iterate forward
-    // in a while loop.
-    moveBack(A->magnitude); moveBack(B->magnitude);
+  // free the list assoscated with  S previously..
+  freeList(&delete_this);
 
-    // create a flag called carry which will let us know if a carry is needed.
-
-    // sick of using '->'...
-    List AList = A->magnitude;
-    List BList = B->magnitude;
-    List SList = S->magnitude;
-
-    printf("\n\t\tCursor A before while loop: %d", index(AList) );
-    printf("\n\t\tCursor B before while loop: %d\n", index(BList) );
-
-    // while both cursors are defined..
-    while ((index(AList) != -1) && (index(BList) != -1)) {
-
-        printf("\n\t\tSList: ");
-        printList(stdout, SList);
-
-        // add the two list elements and insert them into the
-        // new entry that is to be prepended to the list in S.
-        prepend(SList, get(AList) + get(BList));
-
-        // move the cursor in S to the front because that is where we are operating
-        moveFront(SList);
-
-        // if theres a carry.. account for it
-        if (carry == 1) {
-          set(SList, get(SList) + 1);
-          carry = 0;
-        }
-
-        if (get(SList) >= BASE) {
-          carry = 1;
-        }
-
-        movePrev(AList);
-        movePrev(BList);
-    }
-
-    // A list still has stuff in it!
-    if (index(AList) != -1) {
-      // prepend the rest of A list
-      while (index(AList) != -1) {
-        if (carry == 1) {
-          prepend(SList, get(AList) + 1);
-          carry = 0;
-        } else {
-          prepend(SList, get(AList));
-        }
-        movePrev(AList);
-      }
-    }
-
-    //printList(stdout, SList);
-
-    // B list still has stuff in it!
-    if (index(BList) != -1) {
-      // prepend the rest of B list
-      while (index(BList) != -1) {
-        if (carry == 1) {
-          prepend(SList, get(BList) + 1);
-          carry = 0;
-        } else {
-          prepend(SList, get(BList));
-        }
-        movePrev(BList);
-      }
-    }
-
-    //printList(stdout, SList);
-
-    // what if we still have a carry?
-    // prepend a new entry
-    if (carry == 1) {
-      prepend(SList, 1);
-      carry = 0;
-    }
-
-    //printList(stdout, SList);
-
-    // Normalize!
-    normalize(S);
-
-    //printList(stdout, SList);
-
-    // RESTORE CURSOR STATES!
-    // restore cursor of A to its original state
-    if (a_cursor_state != -1) {
-      moveFront(A->magnitude);
-      for (int i = 0; i < a_cursor_state; i++) {
-        moveNext(A->magnitude);
-      }
-    }
-
-    // do the same thing to B
-    if (b_cursor_state != -1) {
-      moveFront(B->magnitude);
-      for (int i = 0; i < b_cursor_state; i++) {
-        moveNext(B->magnitude);
-      }
-    }
-    return; // return because we've finished
-  }
-
-  // CASE: S = S + A;
-  // one of the operands is S, so building solution S will require performing
-  // the algorithm by adding values of A to S.
-  // CASE: S = A + S;
-  else if ((S == A && S != B) || (S == B && S != A)) {
-
-    // determine BigInteger K which is not equal to S...
-    BigInteger K;
-    if (S == A && S != B) K = B;
-    else if (S == B && S != A) K = A;
-
-    // if both are negative
-    if ((K->sign == -1) && (S->sign == -1)) {
-      // follow the normal algorithm. Ensure result S is negative.
-      S->sign = -1;
-    } else if (K->sign == -1 && S->sign == 1) {
-      // we must perform S - K
-      subtract(S, S, K);
-      return;
-    } else if (K->sign == 1 && S->sign == -1) {
-      // we must perform K - S
-      subtract(S, K, S);
-      return;
-    }
-
-    // else perform the addition because both are positive
-
-    List KList = K->magnitude;
-    List SList = S->magnitude;
-    int k_cursor_state = index(KList);
-    int s_cursor_state = index(SList);
-
-    // use K from now on.. now just add values of K to S, following the carry
-    // convention, and then normalize.. restore cursor K.
-
-    moveBack(KList);
-    moveBack(SList);
-
-    // while K cursor is still active
-    int carry = 0;
-    while( index(KList) != -1 ) {
-      // add the element K to S.
-      set(SList, get(SList) + get(KList)); // S + K
-      // account for carry
-      if (carry == 1) {
-        set(SList, get(SList) + 1);
-        carry = 0;
-      }
-      if (get(SList) >= BASE) {
-        carry = 1;
-      }
-      // iterate
-      movePrev(SList);
-      movePrev(KList);
-    }
-    // if K went undefined.. We don't need to work on S anymore.. but we do
-    // need to worry about the carry.
-    if (index(KList) == -1 && index(SList) != -1) {
-      // cursor is already where we need it.
-      // account for carry
-      if (carry == 1) {
-        set(SList, get(SList) + 1);
-        carry = 0;
-      }
-    } else if (index(SList) == -1 && index(KList) != -1) {
-      // if S went undefined.. then we need to prepend the remaining entries of K
-      // to S.. all while considering the carry
-      // so S is now undefined.. K is defined
-      while ( index(KList) != -1) {
-        // prepend directly
-        prepend(SList, get(KList));
-        // account for carry
-        if (carry == 1) {
-          set(SList, get(SList) + 1);
-          carry = 0;
-        }
-        if (get(SList) >= BASE) {
-          carry = 1;
-        }
-        movePrev(KList);
-      }
-    }
-
-    // both cursors went undefined at the same time.
-    normalize(S);
-
-    // restore cursor states
-    if (s_cursor_state != -1) {
-      moveFront(S->magnitude);
-      for (int i = 0; i < s_cursor_state; i++) {
-        moveNext(S->magnitude);
-      }
-    }
-    if (k_cursor_state != -1) {
-      moveFront(K->magnitude);
-      for (int i = 0; i < k_cursor_state; i++) {
-        moveNext(K->magnitude);
-      }
-    }
-    return;
-  }
-
-  // CASE S = S + S = 2S
-  // this case requires multiplying by 2.
-  else if (S == A && S == B) {
-    if (S->sign == -1) {
-      S->sign = 1; // negative times negative is positive
-    }
-
-    List SList = S->magnitude;
-    carry = 0;
-    moveBack(SList);
-    while (index(SList) != -1) {
-      // perform the operation
-      set(SList,  2 * get(SList));
-
-      // account for carry
-      if (carry == 1) {
-        set(SList, get(SList) + 1);
-        carry = 0;
-      }
-      if (get(SList) >= BASE) carry = 1;
-      movePrev(SList);
-    }
-
-    // we are all done. Check for the carry one last time
-    if (carry == 1) {
-      prepend(SList, 1);
-      carry = 0;
-    }
-    normalize(S); // normalize
-    return;
-  } else return;
+  // but when we free T.. the list will also be freed.. so set the list to null.
+  T->magnitude = NULL;
+  freeBigInteger(&T);
 }
 
 // sum()
@@ -640,7 +387,9 @@ BigInteger sum(BigInteger A, BigInteger B) {
       prepend(SList, (sign(A) * get(AList)) + (sign(B) * get(BList)) );
 
       movePrev(AList);
-      movePrev(BList);
+      if (AList != BList) { // to avoid duplicate movement on the same list
+        movePrev(BList);
+      }
   }
   // A list still has stuff in it!
   if (index(AList) != -1) {
