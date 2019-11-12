@@ -16,7 +16,7 @@
 int main(int argc, char* argv[]) {
 
   // create a big integer list
-  BigInteger A, B, C;
+  BigInteger A, B, C, D, E;
 
   // string to test on
   char myString9[] = "+111122223333";
@@ -37,9 +37,14 @@ int main(int argc, char* argv[]) {
   printf("\n");
   printBigInteger(stdout, C);
 
+  printf("\nTESTING ADD: E = A + B\n");
+  E = newBigInteger();
+  add(E, A, B);
+  printf("\n");
+  printBigInteger(stdout, E);
+
 
   printf("\nTESTING DIFF: A = B\n");
-  BigInteger D;
   D = diff(A, B);
   printf("\n");
   printBigInteger(stdout, D);
