@@ -378,8 +378,8 @@ BigInteger sum(BigInteger A, BigInteger B) {
   List BList = B->magnitude;
   List SList = S->magnitude;
 
-  printf("\t\tCursor A before while loop: %d", index(AList) );
-  printf("\t\tCursor B before while loop: %d", index(BList) );
+  //printf("\t\tCursor A before while loop: %d", index(AList) );
+  //printf("\t\tCursor B before while loop: %d", index(BList) );
 
   // while both cursors are defined..
   while ((index(AList) != -1) && (index(BList) != -1)) {
@@ -451,6 +451,8 @@ BigInteger diff(BigInteger A, BigInteger B) {
     // straight computation
     prepend(SList, (sign(A) * get(AList)) - (sign(B) * get(BList)));
     moveFront(SList);
+
+    printf("\tdiff() -- just prepended value of %ld\n", get(SList));
 
     movePrev(AList);
     if (AList != BList) {
