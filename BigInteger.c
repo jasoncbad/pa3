@@ -416,8 +416,21 @@ BigInteger sum(BigInteger A, BigInteger B) {
 // Places the difference of A and B in the existing BigInteger D, overwriting
 // its current state: D = A - B
 void subtract(BigInteger D, BigInteger A, BigInteger B) {
+  BigInteger T = diff(A, B);
 
-  return;
+  // we've now obtained T.. match magnitudes and swap list pointers
+  D->sign = sign(T);
+
+  List delete_this = D->magnitude; // save for deletion
+  D->magnitude = T->magnitude; // point to T's magnitude instead
+
+  // free the list assoscated with  S previously..
+  freeList(&delete_this);
+
+  // but when we free T.. the list will also be freed.. so set the list to null.
+  T->magnitude = NULL;
+  freeBigInteger(&T);
+  T = NULL;
 }
 
 // diff()
@@ -440,7 +453,9 @@ BigInteger diff(BigInteger A, BigInteger B) {
     moveFront(SList);
 
     movePrev(AList);
-    movePrev(BList);
+    if (AList != BList) {
+      movePrev(BList);
+    }
   }
 
   // A list extras
@@ -458,7 +473,6 @@ BigInteger diff(BigInteger A, BigInteger B) {
        movePrev(BList);
      }
   }
-
 
   normalize(S);
   return S;

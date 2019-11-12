@@ -49,16 +49,38 @@ int main(int argc, char* argv[]) {
   add(E, A, A);
   printf("\n");
   printBigInteger(stdout, E);
+  freeBigInteger(&E);
 
   printf("\nTESTING ADD: A = A + A\n\t(a has been changed!)\n");
   add(A, A, A);
   printf("\n");
   printBigInteger(stdout, A);
 
-  printf("\nTESTING DIFF: A = B\n");
+  printf("\nTESTING DIFF: A - B\n");
   D = diff(A, B);
   printf("\n");
   printBigInteger(stdout, D);
+
+
+  printf("\nTESTING SUBTRACT: E = A - B\n");
+  E = newBigInteger();
+  subtract(E, A, B);
+  printf("\n");
+  printBigInteger(stdout, E);
+  freeBigInteger(&E);
+
+  printf("\nTESTING SUBTRACT: E = A - A\n");
+  E = newBigInteger();
+  subtract(E, A, A);
+  printf("\n");
+  printBigInteger(stdout, E);
+
+  printf("\nTESTING SUBTRACT: A = A - A\n");
+  subtract(A, A, A);
+  printf("\n");
+  printBigInteger(stdout, A);
+
+
 
   //printBigInteger(stdout, A);
 
