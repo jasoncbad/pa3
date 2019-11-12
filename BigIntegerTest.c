@@ -42,6 +42,7 @@ int main(int argc, char* argv[]) {
   add(E, A, B);
   printf("\n");
   printBigInteger(stdout, E);
+  freeBigInteger(&E);
 
   printf("\nTESTING ADD: E = A + A\n");
   E = newBigInteger();
@@ -49,6 +50,10 @@ int main(int argc, char* argv[]) {
   printf("\n");
   printBigInteger(stdout, E);
 
+  printf("\nTESTING ADD: A = A + A\n\t(a has been changed!)\n");
+  add(A, A, A);
+  printf("\n");
+  printBigInteger(stdout, A);
 
   printf("\nTESTING DIFF: A = B\n");
   D = diff(A, B);
