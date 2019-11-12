@@ -43,6 +43,12 @@ int main(int argc, char* argv[]) {
   printf("\n");
   printBigInteger(stdout, E);
 
+  printf("\nTESTING ADD: E = A + A\n");
+  E = newBigInteger();
+  add(E, A, A);
+  printf("\n");
+  printBigInteger(stdout, E);
+
 
   printf("\nTESTING DIFF: A = B\n");
   D = diff(A, B);
