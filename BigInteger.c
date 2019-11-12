@@ -452,7 +452,7 @@ BigInteger diff(BigInteger A, BigInteger B) {
     prepend(SList, (sign(A) * get(AList)) - (sign(B) * get(BList)));
     moveFront(SList);
 
-    printf("\tdiff() -- just prepended value of %ld\n", get(SList));
+    //printf("\tdiff() -- just prepended value of %ld\n", get(SList));
 
     movePrev(AList);
     if (AList != BList) {
@@ -567,6 +567,17 @@ void normalize(BigInteger N) {
   // if a carry still exists.. prepend the amount
   if (carry > 0) {
     prepend(NList, carry);
+  }
+
+  // remove any leading entries that are zero.
+  moveFront(NList);
+  while(index(NList) != -1) {
+    if (get(NList) == 0) {
+      deleteFront(NList);
+      moveFront(NList);
+    } else {
+      break;
+    }
   }
 
 
