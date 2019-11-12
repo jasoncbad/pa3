@@ -358,6 +358,7 @@ void add(BigInteger S, BigInteger A, BigInteger B) {
   // but when we free T.. the list will also be freed.. so set the list to null.
   T->magnitude = NULL;
   freeBigInteger(&T);
+  T = NULL;
 }
 
 // sum()
