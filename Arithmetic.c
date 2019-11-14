@@ -109,34 +109,21 @@ int main(int argc, char** argv) {
   C = prod(A, A);
   multiply(C, C, A);
   multiply(C, C, A);
-  add(C, C, C);
-  add(C, C, C);
-  add(C, C, C);
-  add(C, C, C);
-  add(C, C, C);
-  add(C, C, C);
-  add(C, C, C);
-  add(C, C, C);
+
+  BigInteger(X);
+  X = stringToBigInteger("000000009");
+  multiply(C, C, X);
+
 
   D = prod(B, B);
   multiply(D, D, B);
   multiply(D, D, B);
   multiply(D, D, B);
-  add(D, D, D);
-  add(D, D, D);
-  add(D, D, D);
-  add(D, D, D);
-  add(D, D, D);
-  add(D, D, D);
-  add(D, D, D);
-  add(D, D, D);
-  add(D, D, D);
-  add(D, D, D);
-  add(D, D, D);
-  add(D, D, D);
-  add(D, D, D);
-  add(D, D, D);
-  add(D, D, D);
+
+  freeBigInteger(&X);
+  X = stringToBigInteger("000000016");
+
+  multiply(D, D, X);
 
   freeBigInteger(&E);
   E = sum(C, D);
@@ -153,10 +140,12 @@ int main(int argc, char** argv) {
   freeBigInteger(&C);
   freeBigInteger(&D);
   freeBigInteger(&E);
+  freeBigInteger(&X);
   A = NULL;
   B = NULL;
   C = NULL;
   D = NULL;
+  X = NULL;
 
   free(string1);
   free(string2);
