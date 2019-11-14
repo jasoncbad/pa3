@@ -252,7 +252,7 @@ void deleteBack(List L) {
   // TWO CASES: length = 1 and length > 1
   if (length(L) == 1) {
     freeNode(&(L->head));
-    L->head = NULL;
+    //L->head = NULL;
     L->tail = NULL;
     L->length = 0;
     L->index = -1;
