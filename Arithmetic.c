@@ -33,10 +33,14 @@ int main(int argc, char** argv) {
 
   // scan the top of the file to get the length of the number on line 2
   int n;
-  char string1[];
+  fscanf(inFile, "%d\n", &n);
+  char string1[n + 2];
+  fscanf(inFile, "%s\n", &string1);
+
   int m;
-  char string2[];
-  fscanf(inFile, "%d\n%s\n%d\n%s\n", &n, &m , &string1, &string2);
+  fscanf(inFile, %d\n, &m);
+  char string2[m + 2];
+  fscanf(inFile, "%s\n", &string2);
 
   printf("%d %d", n, m);
 
