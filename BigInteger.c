@@ -490,7 +490,7 @@ void multiply(BigInteger P, BigInteger A, BigInteger B) {
 // prod()
 // Returns a reference to a new BigInteger object representing A*B
 BigInteger prod(BigInteger A, BigInteger B) {
-  printf("\t\tproduct() entered...\n");
+  //printf("\t\tproduct() entered...\n");
   BigInteger TempBigInt = newBigInteger();
   TempBigInt->sign = +1;
 
@@ -505,16 +505,16 @@ BigInteger prod(BigInteger A, BigInteger B) {
 
     clear(TempBigInt->magnitude);
 
-    printf("\t\t\tzeros before... = %d...\n", counter);
+    //printf("\t\t\tzeros before... = %d...\n", counter);
 
     // if we need zeros at the beginning..
     for (int i = 0; i < counter; i++) {
       append(TempBigInt->magnitude, 0);
     }
 
-    printf("\t\t\t\tTempBigInt: ");
-    printBigInteger(stdout, TempBigInt);
-    printf("\n");
+    //printf("\t\t\t\tTempBigInt: ");
+    //printBigInteger(stdout, TempBigInt);
+    //printf("\n");
 
 
 
@@ -526,30 +526,30 @@ BigInteger prod(BigInteger A, BigInteger B) {
       prepend(TempBigInt->magnitude, get(B->magnitude) * get(A->magnitude) );
       movePrev(A->magnitude);
 
-      printf("\t\t\tTempBigInt: ");
-      printBigInteger(stdout, TempBigInt);
-      printf("\n");
+      //printf("\t\t\tTempBigInt: ");
+      //printBigInteger(stdout, TempBigInt);
+      //printf("\n");
     }
 
     // at this point.. templist is built. we need to normalize
     // and add to P.
     normalize(TempBigInt);
 
-    printf("\t\t\tNORMALIZED TempBigInt: ");
-    printBigInteger(stdout, TempBigInt);
-    printf("\n");
+    ///printf("\t\t\tNORMALIZED TempBigInt: ");
+    //printBigInteger(stdout, TempBigInt);
+    //printf("\n");
 
     add(P, TempBigInt, P);
 
-    printf("\t\t\tP after adding TempBigInt: ");
-    printBigInteger(stdout, P);
-    printf("\n");
+    //printf("\t\t\tP after adding TempBigInt: ");
+    //printBigInteger(stdout, P);
+    //printf("\n");
 
     normalize(P);
 
-    printf("\t\t\tNORMALIZED P: ");
-    printBigInteger(stdout, P);
-    printf("\n");
+    //printf("\t\t\tNORMALIZED P: ");
+    //printBigInteger(stdout, P);
+    //printf("\n");
 
     movePrev(B->magnitude);
     counter++;
