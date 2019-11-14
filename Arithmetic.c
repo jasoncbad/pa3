@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
   fscanf(inFile, "%s\n", string2);
 
   // create the big integers...
-  BigInteger A, B, C, D, E;
+  BigInteger A, B, C, D, E, X;
   A = stringToBigInteger(string1);
   B = stringToBigInteger(string2);
 
@@ -110,7 +110,6 @@ int main(int argc, char** argv) {
   multiply(C, C, A);
   multiply(C, C, A);
 
-  BigInteger(X);
   X = stringToBigInteger("000000009");
   multiply(C, C, X);
 
