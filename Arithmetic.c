@@ -66,8 +66,8 @@ int main(int argc, char** argv) {
   A = NULL;
   B = NULL;
 
-  free(&string1);
-  free(&string2);
+  free(string1);
+  free(string2);
   string1 = NULL;
   string2 = NULL;
 
