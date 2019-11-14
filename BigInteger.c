@@ -440,6 +440,12 @@ BigInteger diff(BigInteger A, BigInteger B) {
   BigInteger S = newBigInteger();
   S->sign = +1;
 
+  if (compare(A, B) == 0) {
+    S = stringToBigInteger("0");
+    return S; 
+  }
+
+
   moveBack(A->magnitude); moveBack(B->magnitude);
 
   List AList = A->magnitude;
