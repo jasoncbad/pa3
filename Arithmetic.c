@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
   B = stringToBigInteger(string2);
 
   printBigInteger(outFile, A);
-  fprintf(outfile, "\n");
+  fprintf(outFile, "\n");
   printBigInteger(outFile, B);
   fprintf(outfile, "\n");
 
