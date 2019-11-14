@@ -520,7 +520,7 @@ BigInteger prod(BigInteger A, BigInteger B) {
 
 
     // tempList is ready to go
-    moveFront(A->magnitude);
+    moveBack(A->magnitude);
     while (index(A->magnitude) != -1) {
       // multiple the current element at B to A..
       prepend(TempBigInt->magnitude, get(B->magnitude) * get(A->magnitude) );
