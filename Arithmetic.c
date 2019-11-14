@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
   printBigInteger(outFile, A);
   fprintf(outFile, "\n");
   printBigInteger(outFile, B);
-  fprintf(outfile, "\n");
+  fprintf(outFile, "\n");
 
 
 
