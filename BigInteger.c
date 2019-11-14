@@ -333,7 +333,9 @@ BigInteger copy(BigInteger N) {
   A->sign = N->sign;
 
   // copy over the list of N into a new list representing the magnitude of A.
+  freeList(&(A->magnitude));
   A->magnitude = copyList(N->magnitude);
+
 
   // return the deep copy
   // we have allocated HEAP data for a new BigInteger, and also for a new List.
@@ -507,8 +509,6 @@ BigInteger prod(BigInteger A, BigInteger B) {
   //printf("\t\tproduct() entered...\n");
   BigInteger TempBigInt = newBigInteger();
   TempBigInt->sign = +1;
-
-  BigInteger C; // may need this if A = B..
   int duplicate = 0;
 
   if (A == B) {
