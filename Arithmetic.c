@@ -103,6 +103,45 @@ int main(int argc, char** argv) {
   fprintf(outFile, "\n\n");
 
   // 9A^4 + 16B^5
+  freeBigInteger(&C);
+  freeBigInteger(&D);
+
+  C = prod(A, A);
+  multiply(C, C, A);
+  multiply(C, C, A);
+  add(C, C, C);
+  add(C, C, C);
+  add(C, C, C);
+  add(C, C, C);
+  add(C, C, C);
+  add(C, C, C);
+  add(C, C, C);
+  add(C, C, C);
+
+  D = prod(B, B);
+  multiply(D, D, B);
+  multiply(D, D, B);
+  multiply(D, D, B);
+  add(D, D, D);
+  add(D, D, D);
+  add(D, D, D);
+  add(D, D, D);
+  add(D, D, D);
+  add(D, D, D);
+  add(D, D, D);
+  add(D, D, D);
+  add(D, D, D);
+  add(D, D, D);
+  add(D, D, D);
+  add(D, D, D);
+  add(D, D, D);
+  add(D, D, D);
+  add(D, D, D);
+
+  freeBigInteger(E);
+  E = sum(C, D);
+  printBigInteger(outFile, E);
+  fprintf(outFile, "\n\n");
 
 
   // houskeeping
