@@ -276,12 +276,12 @@ void deleteBack(List L) {
     N->prev = NULL;
 
     freeNode(&N);
+    L->length--;
   }
 
 
   // else if the cursor was anywhere else we do not need to adjust it
   // only adjust the length of the list
-  L->length--;
   return;
 }
 
