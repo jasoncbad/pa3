@@ -37,13 +37,13 @@ int main(int argc, char** argv) {
   // scan the top of the file to get the length of the number on line 2
   int n;
   fscanf(inFile, "%d\n", &n);
-  string1 = calloc(n+2, sizeof(char*));
-  fscanf(inFile, "%s\n", &string1);
+  string1 = calloc(n+2, sizeof(char));
+  fscanf(inFile, "%s\n", string1);
 
   int m;
   fscanf(inFile, "%d\n", &m);
-  string2 = calloc(n+2, sizeof(char*));
-  fscanf(inFile, "%s\n", &string2);
+  string2 = calloc(n+2, sizeof(char));
+  fscanf(inFile, "%s\n", string2);
 
   printf("%d %d", n, m);
 
