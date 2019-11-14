@@ -498,7 +498,7 @@ BigInteger prod(BigInteger A, BigInteger B) {
   P->sign = +1; // pretend all is positive for now.
 
 
-  moveFront(A->magnitude); moveFront(B->magnitude);
+  moveBack(A->magnitude); moveBack(B->magnitude);
 
   int counter = 0;
   while(index(B->magnitude) != -1) {
