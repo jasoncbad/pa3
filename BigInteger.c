@@ -490,17 +490,17 @@ void multiply(BigInteger P, BigInteger A, BigInteger B) {
 // prod()
 // Returns a reference to a new BigInteger object representing A*B
 BigInteger prod(BigInteger A, BigInteger B) {
-  BigInteger TempBigInt = newBigIntneger();
+  BigInteger TempBigInt = newBigInteger();
   TempBigInt->sign = +1;
 
   BigInteger P = newBigInteger();
   P->sign = +1; // pretend all is positive for now.
 
 
-  moveFront(A); moveFront(B);
+  moveFront(A->magnitude); moveFront(B->magnitude);
 
   int counter = 0;
-  while(index(B) != -1) {
+  while(index(B->magnitude) != -1) {
     clear(TempBigInt->magnitude);
 
     // if we need zeros at the beginning..
@@ -509,11 +509,11 @@ BigInteger prod(BigInteger A, BigInteger B) {
     }
 
     // tempList is ready to go
-    moveFront(A);
-    while (index(A) != -1) {
+    moveFront(A->magnitude);
+    while (index(A->magnitude) != -1) {
       // multiple the current element at B to A..
-      prepend(TempBigInt->magnitude, get(B) * get(A) );
-      movePrev(A);
+      prepend(TempBigInt->magnitude, get(B->magnitude) * get(A->magnitude) );
+      movePrev(A->magnitude);
     }
 
     // at this point.. templist is built. we need to normalize
@@ -522,7 +522,7 @@ BigInteger prod(BigInteger A, BigInteger B) {
     add(P, TempBigInt, P);
     normalize(P);
 
-    movePrev(B);
+    movePrev(B->magnitude);
     counter++;
   }
 
