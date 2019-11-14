@@ -455,7 +455,7 @@ void printList(FILE* out, List L) {
       }
 
       // prepend the needed zeros
-      for (int i = 0; i < (POWER - count); i++) {
+      for (int i = 0; i < (9 - count); i++) {
         fprintf(out, "0");
       }
 
