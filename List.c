@@ -443,6 +443,24 @@ void printList(FILE* out, List L) {
   // loop through and print each element to the output file 'Output.txt' in
   // the format specified by pa1.
   while(L->cursor != NULL) {
+
+    long entry = get(L);
+    int count = 0;
+    // if the entry is not a full 9 digits long
+    if (entry < (BASE / 10)) {
+      // determine how many digits it is..
+      while (entry != 0) {
+        entry /= 10;
+        ++count;
+      }
+
+      // prepend the needed zeros
+      for (int i = 0; i < (POWER - count); i++) {
+        fprintf(out, "0");
+      }
+
+    }
+
     fprintf(out, "%ld " , get(L));
     moveNext(L);
   }
