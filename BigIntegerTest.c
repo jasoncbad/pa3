@@ -19,8 +19,8 @@ int main(int argc, char* argv[]) {
   BigInteger A, B, C, D, E;
 
   // string to test on
-  char myString9[] = "+111122223333";
-  char myString8[] = "+222211110000";
+  char myString9[] = "-0041085449";
+  char myString8[] = "7402779357";
 
   // create the big integer
   A = stringToBigInteger(myString9);
@@ -80,6 +80,12 @@ int main(int argc, char* argv[]) {
   printf("\n");
   printBigInteger(stdout, A);
 
+  printf("\nTESTING PROD: A - B\n");
+  freeBigInteger(&A);
+  A = stringToBigInteger(myString9);
+  BigInteger F = prod(A, B);
+  printBigInteger(stdout, F);
+
 
 
   //printBigInteger(stdout, A);
@@ -104,6 +110,7 @@ int main(int argc, char* argv[]) {
   freeBigInteger(&C);
   freeBigInteger(&D);
   freeBigInteger(&E);
+  freeBigInteger(&F);
 
   return 0;
 }
