@@ -48,6 +48,9 @@ int main(int argc, char** argv) {
   printf("%d %d", n, m);
 
 
+  // houskeeping
+  close(inFile);
+  close(outFile);
 
   return 0;
 }
