@@ -84,13 +84,23 @@ int main(int argc, char** argv) {
   fprintf(outFile, "\n\n");
 
 
-
-
   // AB
+  freeBigInteger(&C);
+  C = prod(A, B);
+  printBigInteger(outFile, C);
+  fprintf(outFile, "\n\n");
 
   // A^2
+  freeBigInteger(&C);
+  C = prod(A, A);
+  printBigInteger(outFile, C);
+  fprintf(outFile, "\n\n");
 
   // B^2
+  freeBigInteger(&C);
+  C = prod(B, B);
+  printBigInteger(outFile, C);
+  fprintf(outFile, "\n\n");
 
   // 9A^4 + 16B^5
 
@@ -103,6 +113,7 @@ int main(int argc, char** argv) {
   freeBigInteger(&B);
   freeBigInteger(&C);
   freeBigInteger(&D);
+  freeBigInteger(&E);
   A = NULL;
   B = NULL;
   C = NULL;
