@@ -484,7 +484,21 @@ BigInteger diff(BigInteger A, BigInteger B) {
 // Places the product of A and B in the existing BigInteger P, overwriting
 // its current state: P = A*B
 void multiply(BigInteger P, BigInteger A, BigInteger B) {
-  return;
+  BigInteger T = prod(A, B);
+
+  // we've now obtained T.. match magnitudes and swap list pointers
+  P->sign = sign(T);
+
+  List delete_this = P->magnitude; // save for deletion
+  P->magnitude = T->magnitude; // point to T's magnitude instead
+
+  // free the list assoscated with  S previously..
+  freeList(&delete_this);
+
+  // but when we free T.. the list will also be freed.. so set the list to null.
+  T->magnitude = NULL;
+  freeBigInteger(&T);
+  T = NULL;
 }
 
 // prod()
@@ -493,6 +507,15 @@ BigInteger prod(BigInteger A, BigInteger B) {
   //printf("\t\tproduct() entered...\n");
   BigInteger TempBigInt = newBigInteger();
   TempBigInt->sign = +1;
+
+  BigInteger C; // may need this if A = B..
+  int duplicate = 0;
+
+  if (A = B) {
+    duplicate = 1;
+    C = copyBigInteger(B);
+    B = C;
+  }
 
   BigInteger P = newBigInteger();
   P->sign = +1; // pretend all is positive for now.
@@ -515,9 +538,6 @@ BigInteger prod(BigInteger A, BigInteger B) {
     //printf("\t\t\t\tTempBigInt: ");
     //printBigInteger(stdout, TempBigInt);
     //printf("\n");
-
-
-
 
     // tempList is ready to go
     moveBack(A->magnitude);
@@ -552,6 +572,8 @@ BigInteger prod(BigInteger A, BigInteger B) {
     //printf("\n");
 
     movePrev(B->magnitude);
+
+
     counter++;
   }
 
@@ -564,6 +586,12 @@ BigInteger prod(BigInteger A, BigInteger B) {
 
   freeBigInteger(&TempBigInt);
   TempBigInt = NULL;
+
+  if (duplicate == 1) {
+    freeBigInteger(&C);
+    C = NULL;
+  }
+
   return P;
 }
 
