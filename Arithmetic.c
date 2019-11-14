@@ -46,15 +46,23 @@ int main(int argc, char** argv) {
   fscanf(inFile, "%s\n", string2);
 
   // create the big integers...
-  BigInteger A, B;
+  BigInteger A, B, C, D;
   A = stringToBigInteger(string1);
   B = stringToBigInteger(string2);
 
   printBigInteger(outFile, A);
-  fprintf(outFile, "\n");
+  fprintf(outFile, "\n\n");
   printBigInteger(outFile, B);
-  fprintf(outFile, "\n");
+  fprintf(outFile, "\n\n");
 
+  // calc sum and diff
+  C = sum(A, B);
+  D = diff(A, B);
+
+  printBigInteger(outFile, C);
+  fprintf(outFile, "\n\n");
+  printBigInteger(outFile, D);
+  fprintf(outFile, "\n\n");
 
 
   // houskeeping
@@ -63,8 +71,12 @@ int main(int argc, char** argv) {
 
   freeBigInteger(&A);
   freeBigInteger(&B);
+  freeBigInteger(&C);
+  freeBigInteger(&D);
   A = NULL;
   B = NULL;
+  C = NULL;
+  D = NULL;
 
   free(string1);
   free(string2);
