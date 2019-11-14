@@ -513,8 +513,7 @@ BigInteger prod(BigInteger A, BigInteger B) {
 
   if (A == B) {
     duplicate = 1;
-    C = copy(B);
-    B = C;
+    B = copy(B);
   }
 
   BigInteger P = newBigInteger();
@@ -588,8 +587,8 @@ BigInteger prod(BigInteger A, BigInteger B) {
   TempBigInt = NULL;
 
   if (duplicate == 1) {
-    freeBigInteger(&C);
-    C = NULL;
+    freeBigInteger(&B);
+    B = A
   }
 
   return P;
