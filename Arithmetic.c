@@ -80,7 +80,7 @@ int main(int argc, char** argv) {
 
   E = diff(C, D);
 
-  printBigInteger(outFile, C);
+  printBigInteger(outFile, E);
   fprintf(outFile, "\n\n");
 
 
