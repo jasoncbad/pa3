@@ -588,7 +588,7 @@ BigInteger prod(BigInteger A, BigInteger B) {
 
   if (duplicate == 1) {
     freeBigInteger(&B);
-    B = A
+    B = A;
   }
 
   return P;
