@@ -49,8 +49,8 @@ int main(int argc, char** argv) {
 
 
   // houskeeping
-  close(inFile);
-  close(outFile);
+  fclose(inFile);
+  fclose(outFile);
 
   return 0;
 }
