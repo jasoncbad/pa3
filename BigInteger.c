@@ -606,11 +606,11 @@ void normalize(BigInteger N) {
   // else the sign is positive and its time to start from the back
   // and move forward determining the amount of carries and borrows needed.
   moveBack(NList);
-  int carry = 0;
+  long carry = 0;
   while(index(NList) != -1) {
       // apply a carry
       if (carry != 0) {
-        printf("\t\tadding %d to %ld..\n", carry, get(NList));
+        printf("\t\tadding %ld to %ld..\n", carry, get(NList));
         set(NList, get(NList) + carry);
         carry = 0;
       }
@@ -627,8 +627,8 @@ void normalize(BigInteger N) {
       } else if (get(NList) >= BASE) {
         printf("\ncarry applicable!\n");
         carry = (get(NList) / BASE); // will produce a positive carry
-        printf("\tcarry set to %d!\n", carry);
-        printf("\tneed to subract %d from the current base!\n", carry);
+        printf("\tcarry set to %ld!\n", carry);
+        printf("\tneed to subract %ld from the current base!\n", carry);
         set(NList, get(NList) - (BASE * carry));
       } else {
         // digit is within range and no carry is needed..
