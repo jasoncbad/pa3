@@ -447,7 +447,7 @@ void printList(FILE* out, List L) {
     long entry = get(L);
     int count = 0;
     // if the entry is not a full 9 digits long
-    if (entry < 100000000 {
+    if (entry < 100000000) {
       // determine how many digits it is..
       while (entry != 0) {
         entry /= 10;
