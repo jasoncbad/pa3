@@ -45,12 +45,31 @@ int main(int argc, char** argv) {
   string2 = calloc(n+2, sizeof(char));
   fscanf(inFile, "%s\n", string2);
 
-  printf("%d %d", n, m);
+  // create the big integers...
+  BigInteger A, B;
+  A = stringToBigInteger(string1);
+  B = stringToBigInteger(string2);
+
+  printBigInteger(outFile, A);
+  fprintf(outfile, "\n");
+  printBigInteger(outFile, B);
+  fprintf(outfile, "\n");
+
 
 
   // houskeeping
   fclose(inFile);
   fclose(outFile);
+
+  freeBigInteger(&A);
+  freeBigInteger(&B);
+  A = NULL;
+  B = NULL;
+
+  free(&string1);
+  free(&string2);
+  string1 = NULL;
+  string2 = NULL;
 
   return 0;
 }
