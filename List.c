@@ -244,19 +244,28 @@ void deleteBack(List L) {
 
   Node N = NULL;
 
-  if (length(L) == 0) {
+  if (L == NULL || length(L) <= 0) {
     //printf("List Error: attempt to call deleteBack() on null list\n");
     return;
   }
 
+  // if the cursor was at the back when deleted
+  if (index(L) == (length(L) - 1))
+  {
+    // set cursor undefined
+    L->cursor = NULL;
+    L->index = -1;
+  }
+
   // TWO CASES: length = 1 and length > 1
   if (length(L) == 1) {
-    freeNode(&(L->head));
+    /*freeNode(&(L->head));
     //L->head = NULL;
     L->tail = NULL;
     L->length = 0;
     L->index = -1;
-    L->cursor = NULL;
+    L->cursor = NULL;*/
+    clear(L);
   } else if (length(L) > 1) {
     // code for freeing a back node when length > 1
     N = L->tail;
@@ -269,13 +278,7 @@ void deleteBack(List L) {
     freeNode(&N);
   }
 
-  // if the cursor was at the back when deleted
-  if (index(L) == (length(L) - 1))
-  {
-    // set cursor undefined
-    L->cursor = NULL;
-    L->index = -1;
-  }
+
   // else if the cursor was anywhere else we do not need to adjust it
   // only adjust the length of the list
   L->length--;
