@@ -138,7 +138,7 @@ int main(int argc, char** argv) {
   add(D, D, D);
   add(D, D, D);
 
-  freeBigInteger(E);
+  freeBigInteger(&E);
   E = sum(C, D);
   printBigInteger(outFile, E);
   fprintf(outFile, "\n\n");
