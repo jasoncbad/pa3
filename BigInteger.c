@@ -623,11 +623,12 @@ void normalize(BigInteger N) {
         } else {
           carry = (get(NList) / BASE) - 1; // will product a negative carry in this case
         }
-      set(NList, get(NList) + abs(BASE * carry));
+        set(NList, get(NList) + abs(BASE * carry));
       } else if (get(NList) >= BASE) {
         printf("\ncarry applicable!\n");
         carry = (get(NList) / BASE); // will produce a positive carry
         printf("\tcarry set to %d!\n", carry);
+        printf("\tneed to subract %d from the current base!\n", carry);
         set(NList, get(NList) - (BASE * carry));
       } else {
         // digit is within range and no carry is needed..
