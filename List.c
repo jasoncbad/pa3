@@ -257,14 +257,17 @@ void deleteBack(List L) {
     L->length = 0;
     L->index = -1;
     L->cursor = NULL;
+  } else if (length(L) > 1) {
+    // code for freeing a back node when length > 1
+    N = L->tail;
+    L->tail = L->tail->prev;
+
+    L->tail->next =NULL;
+
+    N->prev = NULL;
+
+    freeNode(&N);
   }
-
-  // code for freeing a back node when length > 1
-  N = L->tail;
-  L->tail->prev->next = NULL;
-  L->tail = L->tail->prev;
-  freeNode(&N);
-
 
   // if the cursor was at the back when deleted
   if (index(L) == (length(L) - 1))
