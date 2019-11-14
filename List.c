@@ -447,21 +447,23 @@ void printList(FILE* out, List L) {
     long entry = get(L);
     int count = 0;
     // if the entry is not a full 9 digits long
-    if (entry < 100000000) {
-      // determine how many digits it is..
-      while (entry != 0) {
-        entry /= 10;
-        ++count;
-      }
+    if (L->cursor != L->head) {
+      if (entry < 100000000) {
+        // determine how many digits it is..
+        while (entry != 0) {
+          entry /= 10;
+          ++count;
+        }
 
-      // prepend the needed zeros
-      for (int i = 0; i < (9 - count); i++) {
-        fprintf(out, "0");
-      }
+        // prepend the needed zeros
+        for (int i = 0; i < (9 - count); i++) {
+          fprintf(out, "0");
+        }
 
+      }
     }
 
-    fprintf(out, "%ld " , get(L));
+    fprintf(out, "%ld" , get(L));
     moveNext(L);
   }
   printf("\n");
