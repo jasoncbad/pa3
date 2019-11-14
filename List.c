@@ -174,23 +174,26 @@ void append(List L, long data) {
   // inserts new element into L.
   // if L is non-empty, inserts it after the last element
 
+/*
   if (length(L) == 0) {
     // code for inserting a one and only node
     prepend(L, data); // recycle code!
     (L->length)--;
     return;
   }
-
+*/
 
   // otherwise length is > 0
   // code for inserting a node AFTER the last node
   Node new_node = newNode(data);
   // Node target_node = L->head;
-
-  L->tail->next = new_node;
-  new_node->prev = L->tail;
-  L->tail = new_node;
-
+  if (length(L) > 0){
+    L->tail->next = new_node;
+    new_node->prev = L->tail;
+    L->tail = new_node;
+  } else {
+    L->head = L->tail = new_node;
+  }
 
   // increment list size
   // no cursor redefinition needed
