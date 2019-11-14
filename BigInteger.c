@@ -513,7 +513,7 @@ BigInteger prod(BigInteger A, BigInteger B) {
     }
 
     printf("\t\t\t\tTempBigInt: ");
-    printBigInt(TempBigInt);
+    printBigInteger(stdout, TempBigInt);
     printf("\n");
 
 
@@ -527,7 +527,7 @@ BigInteger prod(BigInteger A, BigInteger B) {
       movePrev(A->magnitude);
 
       printf("\t\t\tTempBigInt: ");
-      printBigInt(TempBigInt);
+      printBigInteger(stdout, TempBigInt);
       printf("\n");
     }
 
@@ -536,19 +536,19 @@ BigInteger prod(BigInteger A, BigInteger B) {
     normalize(TempBigInt);
 
     printf("\t\t\tNORMALIZED TempBigInt: ");
-    printBigInt(TempBigInt);
+    printBigInteger(stdout, TempBigInt);
     printf("\n");
 
     add(P, TempBigInt, P);
 
     printf("\t\t\tP after adding TempBigInt: ");
-    printBigInt(P);
+    printBigInteger(stdout, P);
     printf("\n");
 
     normalize(P);
 
     printf("\t\t\tNORMALIZED P: ");
-    printBigInt(P);
+    printBigInteger(stdout, P);
     printf("\n");
 
     movePrev(B->magnitude);
