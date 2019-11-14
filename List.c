@@ -177,8 +177,10 @@ void append(List L, long data) {
   if (length(L) == 0) {
     // code for inserting a one and only node
     prepend(L, data); // recycle code!
+    (L->length)--;
     return;
   }
+
 
   // otherwise length is > 0
   // code for inserting a node AFTER the last node
