@@ -513,7 +513,7 @@ BigInteger prod(BigInteger A, BigInteger B) {
 
   if (A = B) {
     duplicate = 1;
-    C = copyBigInteger(B);
+    C = copy(B);
     B = C;
   }
 
