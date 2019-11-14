@@ -511,7 +511,7 @@ BigInteger prod(BigInteger A, BigInteger B) {
   BigInteger C; // may need this if A = B..
   int duplicate = 0;
 
-  if (A = B) {
+  if (A == B) {
     duplicate = 1;
     C = copy(B);
     B = C;
