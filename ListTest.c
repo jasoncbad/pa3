@@ -49,6 +49,32 @@ int main(int argc, char* argv[]) {
   printList(stdout, A);
   printf("\n\tlength = %d\n\tindex = %d\n\n", length(A), index(A));
 
+  printf("Append 5..\n");
+  append(A, 5);
+  printf("\t");
+  printList(stdout, A);
+  printf("\n\tlength = %d\n\tindex = %d\n\n", length(A), index(A));
+
+  printf("moveFront..\n");
+  moveFront(A);
+  printf("\t");
+  printList(stdout, A);
+  printf("\n\tlength = %d\n\tindex = %d\n\n", length(A), index(A));
+
+  printf("insertAfter (12)..\n");
+  insertAfter(A, 12);
+  printf("\t");
+  printList(stdout, A);
+  printf("\n\tlength = %d\n\tindex = %d\n\n", length(A), index(A));
+
+  printf("delete at cursor...\n");
+  delete(A);
+  printf("\t");
+  printList(stdout, A);
+  printf("\n\tlength = %d\n\tindex = %d\n\n", length(A), index(A));
+
+
+
 
 
 
