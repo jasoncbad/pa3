@@ -683,6 +683,7 @@ void normalize(BigInteger N) {
 
   if (length(NList) == 0) {
     prepend(NList, 0);
+    N->sign = 0;
   }
 
 
