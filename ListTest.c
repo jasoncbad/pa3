@@ -19,68 +19,8 @@ int main(int argc, char* argv[]) {
   List A = newList();
   List B = newList();
 
-  printf("Append 1..\n");
-  append(A, 1);
-  printf("\t");
-  printList(stdout, A);
-  printf("\n\tlength = %d\n\tindex = %d\n\n", length(A), index(A));
-
-  printf("Append 2..\n");
-  append(A, 2);
-  printf("\t");
-  printList(stdout, A);
-  printf("\n\tlength = %d\n\tindex = %d\n\n", length(A), index(A));
-
-  printf("moveFront..\n");
-  moveFront(A);
-  printf("\t");
-  printList(stdout, A);
-  printf("\n\tlength = %d\n\tindex = %d\n\n", length(A), index(A));
-
-  printf("delete at cursor...\n");
-  delete(A);
-  printf("\t");
-  printList(stdout, A);
-  printf("\n\tlength = %d\n\tindex = %d\n\n", length(A), index(A));
-
-  printf("Append 3..\n");
-  append(A, 3);
-  printf("\t");
-  printList(stdout, A);
-  printf("\n\tlength = %d\n\tindex = %d\n\n", length(A), index(A));
-
-  printf("Append 5..\n");
-  append(A, 5);
-  printf("\t");
-  printList(stdout, A);
-  printf("\n\tlength = %d\n\tindex = %d\n\n", length(A), index(A));
-
-  printf("moveFront..\n");
-  moveFront(A);
-  printf("\t");
-  printList(stdout, A);
-  printf("\n\tlength = %d\n\tindex = %d\n\n", length(A), index(A));
-
-  printf("insertAfter (12)..\n");
-  insertAfter(A, 12);
-  printf("\t");
-  printList(stdout, A);
-  printf("\n\tlength = %d\n\tindex = %d\n\n", length(A), index(A));
-
-  printf("delete at cursor...\n");
-  delete(A);
-  printf("\t");
-  printList(stdout, A);
-  printf("\n\tlength = %d\n\tindex = %d\n\n", length(A), index(A));
-
-
-
-
-
-
-
-  // add some values
-  /*printf("\tList A/B created..\n\tadding values...\n");
+  //add some values
+  printf("\tList A/B created..\n\tadding values...\n");
   append(A, 1337);
   append(A, 123456789);
   append(A, 987654321);
@@ -226,12 +166,7 @@ int main(int argc, char* argv[]) {
 
   A = NULL;
   B = NULL;
-  C = NULL;*/
-
-  freeList(&A);
-  freeList(&B);
-  A = NULL;
-  B = NULL;
+  C = NULL;
 
   printf("Test client ended...\n\n");
   return 0;
