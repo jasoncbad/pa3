@@ -173,6 +173,10 @@ void prepend(List L, long data) {
 void append(List L, long data) {
   // inserts new element into L.
   // if L is non-empty, inserts it after the last element
+  if (L == NULL){
+    return;
+  }
+
 
 /*
   if (length(L) == 0) {
