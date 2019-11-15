@@ -409,9 +409,14 @@ void delete(List L) {
     // cursor is at front
     if (index(L) == 0) {
       N = L->head; // same delete code as above
-      L->head = L->tail; //= NULL;
+      L->head = L->head->next;
       freeNode(&N);
       L->head->prev = NULL;
+
+
+      //L->head = L->tail; //= NULL;
+      //freeNode(&N);
+      //L->head->prev = NULL;
     } else if (index(L) == (length(L) - 1)) { // cursor is at back
       N = L->tail;
       L->tail->prev->next = NULL;
