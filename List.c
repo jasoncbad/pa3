@@ -210,7 +210,7 @@ void append(List L, long data) {
 // PRE: length >0
 void deleteFront(List L) {
 
-  Node N = NULL;
+  Node N;
 
   if (length(L) == 0) {
     //printf("List Error: attempt to call deleteFront() on null list\n");
