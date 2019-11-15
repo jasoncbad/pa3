@@ -230,7 +230,7 @@ void deleteFront(List L) {
 
   // code for freeing a front node when length > 1
   N = L->head;
-  L->head = L->head->next;
+  L->head = N->next;
   N->prev = NULL;
   freeNode(&N);
   L->length--;
