@@ -4,6 +4,8 @@
   Programmer: Jay Montoya
   UCSC ID: jaanmont | 1742317
 
+  Definitions for the list ADT. 
+
 -----------------------------------
 */
 #include <stdio.h>
@@ -300,6 +302,7 @@ void deleteBack(List L) {
 
 
 // moveFront()
+// Moves the cursor to the frontmost element of the list.
 void moveFront(List L) {
   if (length(L) == 0) {
     //printf("List Warning: attempt to move to front element on null list\n");
@@ -312,8 +315,7 @@ void moveFront(List L) {
 }
 
 // moveBack()
-//
-//
+// Moves the cursor to the backmost element of the list.
 void moveBack(List L) {
   if (length(L) == 0) {
     //printf("List Warning: attempt to move to back element on null list\n");
@@ -558,20 +560,6 @@ void insertAfter(List L, long data) {
      L->length++;
    }
  }
-
-
-/* getting rid of concatList because i dont need it and it causes leaks
-// concatList()
-// concatenates the contents of list B onto list A
-List concatList(List A, List B) {
-   moveFront(B);
-   while(index(B) >= 0) {
-     append(A, get(B));
-     moveNext(B);
-   }
-   return A;
- }
- */
 
 // clear()
 // clears the contents of the list

@@ -31,6 +31,6 @@ BigInteger diff(BigInteger A, BigInteger B);
 void multiply(BigInteger P, BigInteger A, BigInteger B);
 BigInteger prod(BigInteger A, BigInteger B);
 
-// other operations
+// other operations for this project
 void printBigInteger(FILE* out, BigInteger N);
 void normalize(BigInteger N);

@@ -155,10 +155,6 @@ int main(int argc, char* argv[]) {
   printf("\t\tlength = %d\n", length(C));
 
 
-  // TODO: Test all that shit and valgrind that shit
-
-  // TODO: START ON BIGINTEGER RIGHT AWAY YOU PIECE OF SHIT
-
   // clean up our mess
   freeList(&A);
   freeList(&B);

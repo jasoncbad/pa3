@@ -8,15 +8,18 @@
 */
 typedef struct ListObj* List;
 
+// construction/destruction
 List newList(void);
 void freeList(List* pL);
 
+// accessors
 int length(List L);
 int index(List L);
 long front(List L);
 long back(List L);
 long get(List L);
 
+// operations
 void clear(List L);
 void moveFront(List L);
 void moveBack(List L);
@@ -31,8 +34,6 @@ void deleteBack(List L);
 void delete(List L);
 
 void printList(FILE* out, List L);
-
-//List concatList(List A, List B);
 
 // also included for this project
 List copyList(List L);

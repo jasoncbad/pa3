@@ -4,6 +4,13 @@
   Programmer: Jay Montoya
   UCSC ID: jaanmont | 1742317
 
+  Contains definitions for the BigInteger data type.
+  A BigIntegerObj has two components:
+    - an int (1, -1, 0) specifying the sign.
+    - a normalized List of longs specifying the magnitude.
+
+  For a complete list of operations see the BigInteger.h file.
+
 -----------------------------------
 */
 #include <stdio.h>
@@ -197,14 +204,14 @@ void negate(BigInteger N) {
 // PRE: s is a non-empty string containing only base ten digits {0,1,2..,9}
 //  and an optional sign {+, -} prefix.
 BigInteger stringToBigInteger(char* s) {
-  printf("\tstringToBigInteger() started...\n");
+  //printf("\tstringToBigInteger() started...\n");
 
   // create a BigInteger object to return
   BigInteger A = newBigInteger();
 
   // First determine the sign by observing the first character in the string
   char* cursorChar = s;
-  printf("\t\tFirst char in the given string is: %c\n", *cursorChar);
+  //printf("\t\tFirst char in the given string is: %c\n", *cursorChar);
 
   if (*cursorChar == '-') {
     A->sign = -1;
@@ -227,20 +234,14 @@ BigInteger stringToBigInteger(char* s) {
     cursorChar = cursorChar + 1;
   }
 
-  printf("\t\tFirst actual number in the given string is: %c\n", *cursorChar);
-
-
-
+  //printf("\t\tFirst actual number in the given string is: %c\n", *cursorChar);
   // Run through all meaningful characters and count how many there are
   int length = 0;
   while(*cursorChar != '\0') {
     length++;
     cursorChar = cursorChar + 1;
   }
-
-  printf("\t\tNumber of meaningful digits in the string is: %d\n", length);
-
-
+  //printf("\t\tNumber of meaningful digits in the string is: %d\n", length);
   if (length == 0) {
     printf("\tcould not build bigInt.. no meaningful digits in string!\n");
     return A;
@@ -553,26 +554,9 @@ BigInteger prod(BigInteger A, BigInteger B) {
     // at this point.. templist is built. we need to normalize
     // and add to P.
     normalize(TempBigInt);
-
-    ///printf("\t\t\tNORMALIZED TempBigInt: ");
-    //printBigInteger(stdout, TempBigInt);
-    //printf("\n");
-
     add(P, TempBigInt, P);
-
-    //printf("\t\t\tP after adding TempBigInt: ");
-    //printBigInteger(stdout, P);
-    //printf("\n");
-
     normalize(P);
-
-    //printf("\t\t\tNORMALIZED P: ");
-    //printBigInteger(stdout, P);
-    //printf("\n");
-
     movePrev(B->magnitude);
-
-
     counter++;
   }
 
@@ -659,9 +643,7 @@ void normalize(BigInteger N) {
         set(NList, get(NList) - (BASE * carry));
       } else {
         // digit is within range and no carry is needed..
-
       }
-
       movePrev(NList);
   }
 
@@ -685,6 +667,4 @@ void normalize(BigInteger N) {
     prepend(NList, 0);
     N->sign = 0;
   }
-
-
 }

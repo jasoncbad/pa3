@@ -1,8 +1,19 @@
+/* --------------------------------
+
+  Arithmetic.c | PA3
+  Programmer: Jay Montoya
+  UCSC ID: jaanmont | 1742317
+
+  Client for this project. Builds two BigIntegerObj's from the file arguments
+  and performs arithmetic.
+
+-----------------------------------
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "BigInteger.h"
 #include "string.h"
-#define MAX_BUFFER 50
+
 
 int main(int argc, char** argv) {
   // 1) Check that there are two command line arguments (other than the program
@@ -25,11 +36,6 @@ int main(int argc, char** argv) {
   // open streams to files
   inFile = fopen(argv[1], "r");
   outFile = fopen(argv[2],"w");
-
-  // read the entire line
-  /*while(fgets(str, MAX_BUFFER, inFile) != NULL) {
-    strcpy(inputArray[j], str);
-  }*/
 
   char* string1;
   char* string2;
