@@ -255,8 +255,8 @@ BigInteger stringToBigInteger(char* s) {
 
   num_entries = new_power + 1;
 
-  printf("\t\tThe most significant place for this BigInteger in base %d is the 10^%d's place...\n", BASE, new_power);
-  printf("\t\tThe number of nodes our list is then: %d\n", num_entries);
+  //printf("\t\tThe most significant place for this BigInteger in base %d is the 10^%d's place...\n", BASE, new_power);
+  //printf("\t\tThe number of nodes our list is then: %d\n", num_entries);
 
   // count from 1 to (num_entries) in a for loop and perform the following
   // 1. The first iteration is special, because the most significant 'digit'
@@ -317,9 +317,9 @@ BigInteger stringToBigInteger(char* s) {
 
   } // end of for loop
 
-  printf("\tLIST CREATED: "); //printList(stdout, A->magnitude);
+  //printf("\tLIST CREATED: "); //printList(stdout, A->magnitude);
 
-  printf("\tstringToBigInteger() ended...\n");
+  //printf("\tstringToBigInteger() ended...\n");
   return A;
 }
 
