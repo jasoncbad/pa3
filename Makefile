@@ -5,6 +5,11 @@
 #  UCSC ID: jaanmont | 1742317
 #
 #-----------------------------------
+all : Arithmetic
+
+Arithmetic : Arithmetic.o BigInteger.o List.o
+	gcc -o Arithmetic Arithmetic.o BigInteger.o List.o
+
 ListTest : ListTest.o List.o
 	gcc -o ListTest ListTest.o List.o
 
@@ -23,11 +28,8 @@ BigIntegerTest.o : BigIntegerTest.c BigInteger.h
 BigInteger.o :	BigInteger.c BigInteger.h
 	gcc -c -std=c99 -Wall BigInteger.c
 
-Arithmetic : Arithmetic.o BigInteger.o List.o
-	gcc -o Arithmetic Arithmetic.o BigInteger.o List.o
-
 Arithmetic.o : Arithmetic.c BigInteger.h
 	gcc -c -std=c99 -Wall Arithmetic.c
 
 clean :
-	rm -f Lex ListTest ListTest.o List.o BigIntegerTest BigIntegerTest.o BigInteger.o
+	rm -f *.o Arithmetic ListTest BigIntegerTest
